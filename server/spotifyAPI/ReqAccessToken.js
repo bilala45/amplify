@@ -5,10 +5,6 @@ import qs from "qs";
 // credentials
 const clientId = process.env.CLIENT_ID;
 const clientSecret = process.env.CLIENT_SECRET;
-// data object
-const data = { grant_type: "client_credentials" };
-// authentication url
-const url = "https://accounts.spotify.com/api/token";
 
 // helper method to generate base64 encoded authorization string
 // format: Basic <base64 encoded client_id:client_secret>
@@ -20,26 +16,32 @@ const getAuthorizationHeader = () => {
   return "Basic " + clientCredsBase64;
 };
 
-// post request to retrieve access token
-const getAccessToken = async () => {
-  // payload for post request
-  const payload = {
-    method: "POST",
-    url: url,
-    headers: {
-      // client credentials
-      Authorization: getAuthorizationHeader(),
-      // format in which data object is sent
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    // stringify data as url query string (according to content-type header)
-    data: qs.stringify(data),
-  };
-
-  // axios POST request
-  await axios(payload)
-    .then((res) => console.log(res.data))
-    .catch((error) => console.log(error));
+// payload for post request to retrieve Spotify access token
+const payload = {
+  method: "POST",
+  url: "https://accounts.spotify.com/api/token",
+  headers: {
+    // client credentials
+    Authorization: getAuthorizationHeader(),
+    // format in which data object is sent
+    "Content-Type": "application/x-www-form-urlencoded",
+  },
+  // stringify data as url query string (according to content-type header)
+  data: qs.stringify({ grant_type: "client_credentials" }),
 };
 
-getAccessToken();
+// post request to retrieve access token
+const getAccessToken = async () => {
+  // axios POST request
+  try {
+    // store response object and return access token
+    const res = await axios(payload);
+    console.log(res.data);
+    return res.data.access_token;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// export getAccessToken function for use by other
+export default getAccessToken;

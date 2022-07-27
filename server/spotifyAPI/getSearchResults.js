@@ -7,7 +7,7 @@ const accessToken = await getAccessToken();
 
 // search query parameters
 const queryParams = {
-  q: "Dua Lipa",
+  q: "Kendrick Lamar",
   type: "artist",
   limit: 5,
 };

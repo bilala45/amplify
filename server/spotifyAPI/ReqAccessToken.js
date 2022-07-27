@@ -1,19 +1,16 @@
-import "dotenv/config";
+import { spotifyClientId, spotifyClientSecret } from "../config.js";
 import axios from "axios";
 import qs from "qs";
-
-// credentials
-const clientId = process.env.CLIENT_ID;
-const clientSecret = process.env.CLIENT_SECRET;
 
 // helper method to generate base64 encoded authorization string
 // format: Basic <base64 encoded client_id:client_secret>
 const getAuthorizationHeader = () => {
   // creates a buffer from client credentials and encodes in base64 string
-  const clientCredsBase64 = Buffer.from(`${clientId}:${clientSecret}`).toString(
-    "base64"
-  );
-  return "Basic " + clientCredsBase64;
+  const clientCredsBase64 = Buffer.from(
+    `${spotifyClientId}:${spotifyClientSecret}`,
+    "utf-8"
+  ).toString("base64");
+  return `Basic ${clientCredsBase64}`;
 };
 
 // payload for post request to retrieve Spotify access token
@@ -38,10 +35,11 @@ const getAccessToken = async () => {
     const res = await axios(payload);
     return res.data.access_token;
   } catch (error) {
-    console.log(error);
+    console.log(error.response.data);
   }
 };
 
+const result = await getAccessToken();
 // export getAccessToken function for use by other
 export default getAccessToken;
 

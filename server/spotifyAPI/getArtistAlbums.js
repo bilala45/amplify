@@ -33,7 +33,7 @@ const getArtistAlbums = async () => {
     const res = await axios(payload);
     return res.data;
   } catch (error) {
-    console.log(error);
+    console.log(error.response);
   }
 };
 

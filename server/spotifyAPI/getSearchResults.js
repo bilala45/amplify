@@ -7,7 +7,7 @@ const accessToken = await getAccessToken();
 
 // search query parameters
 const queryParams = {
-  q: "The Weeknd",
+  q: "Olivia Rodrigo",
   type: "artist",
   limit: 5,
 };

@@ -64,7 +64,4 @@ for (const album of albumsArr) {
   }
 }
 
-// print entries of albumMap
-console.log(albumMap);
-
 export default albumMap;

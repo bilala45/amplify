@@ -54,3 +54,4 @@ for (const value of albumMap.values()) {
 }
 
 console.log(artistTracks);
+export default artistTracks;

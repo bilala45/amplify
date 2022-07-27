@@ -1,12 +1,13 @@
 import getAccessToken from "./reqAccessToken.js";
 import qs from "qs";
+import axios from "axios";
 
 // generate access token
 const accessToken = await getAccessToken();
 
 // search query parameters
 const queryParams = {
-  q: "Kend",
+  q: "Kendrick Lamar",
   type: "artist",
   limit: 5,
 };
@@ -19,5 +20,24 @@ const payload = {
   headers: {
     // access token
     Authorization: `Bearer ${accessToken}`,
+    "Content-Type": "application/json",
   },
 };
+
+// method to retrieve search results given query parameters
+const searchResults = async () => {
+  // axios GET request
+  try {
+    // store response object and return items
+    const res = await axios(payload);
+    return res.data.artists.items;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const data = await searchResults();
+// save ID of top artist result and export
+const topResultID = data[0].id;
+
+export default topResultID;

@@ -30,8 +30,6 @@ const payload = {
   data: qs.stringify({ grant_type: "client_credentials" }),
 };
 
-console.log(payload.data);
-
 // post request to retrieve access token
 const getAccessToken = async () => {
   // axios POST request

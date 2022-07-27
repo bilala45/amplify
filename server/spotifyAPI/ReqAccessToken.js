@@ -44,3 +44,5 @@ const getAccessToken = async () => {
 
 // export getAccessToken function for use by other
 export default getAccessToken;
+
+// MIGHT NOT NEED TO GENERATE NEW ACCESS TOKEN EVERY SINGLE TIME A CALL IS MADE (cache access token in database?)

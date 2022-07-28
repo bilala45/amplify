@@ -1,8 +1,8 @@
 import qs from "qs";
 import axios from "axios";
 
-// retrieve artist's albums
-const getUserTopTracks = async (accessToken) => {
+// retrieve user's top tracks
+const reqUserTopTracks = async (accessToken) => {
   // top tracks parameters
   const userTopTracksParams = qs.stringify({
     // top tracks from approximately last 6 months
@@ -28,6 +28,22 @@ const getUserTopTracks = async (accessToken) => {
   } catch (error) {
     console.log(error.response.data);
   }
+};
+
+/**
+ * Generates map of user's top tracks
+ * key: track name, values: { track id }
+ */
+const getUserTopTracks = async (accessToken) => {
+  const tracksMap = new Map();
+  const userTracks = await reqUserTopTracks(accessToken);
+
+  // iterate through tracks in album and add to map
+  for (const track of userTracks) {
+    tracksMap.set(track.name, { id: track.id });
+  }
+
+  return tracksMap;
 };
 
 export default getUserTopTracks;

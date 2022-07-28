@@ -1,21 +1,10 @@
-import getAccessToken from "./reqAccessToken.js";
-import artistTracks from "./getArtistTracks.js";
 import qs from "qs";
 import axios from "axios";
 
-// generate access token
-const accessToken = await getAccessToken();
-
-// map to store audio features with track ids as keys
-const audioFeaturesMap = new Map();
-
-// iterate through ids in artistTracks and set as keys in map
-for (const [key, value] of artistTracks) {
-  audioFeaturesMap.set(value.id, { name: key });
-}
-
-// generate id strings to pass as query to api call
-const createIdStrings = () => {
+/**
+ * Helper method to generate array of track id strings in groups of 100
+ */
+const createIdStrings = (artistTracks) => {
   let trackIds = [];
 
   // iterate through ids in artistTracks
@@ -34,10 +23,10 @@ const createIdStrings = () => {
   return idGroups;
 };
 
-const idGroups = createIdStrings();
-
-// retrieve audio features for each group of ids
-for (const idGroup of idGroups) {
+/**
+ * Helper method to get audio features for a group of tracks
+ */
+const getGroupAudioFeatures = async (accessToken, idGroup) => {
   // query parameters
   const audioFeatureParams = qs.stringify({ ids: idGroup });
 
@@ -46,43 +35,65 @@ for (const idGroup of idGroups) {
     method: "GET",
     url: `https://api.spotify.com/v1/audio-features?${audioFeatureParams}`,
     headers: {
-      // access token
       Authorization: `Bearer ${accessToken}`,
       "Content-Type": "application/json",
     },
   };
 
-  // retrieve audio features
-  const getAudioFeatures = async () => {
-    // axios GET request
-    try {
-      // store response object and return items
-      const res = await axios(payload);
-      return res.data.audio_features;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const data = await getAudioFeatures();
-
-  for (const item of data) {
-    audioFeaturesMap.set(item.id, {
-      ...audioFeaturesMap.get(item.id),
-      danceability: item.danceability,
-      energy: item.energy,
-      key: item.key,
-      loudness: item.loudness,
-      mode: item.mode,
-      speechiness: item.speechiness,
-      acousticness: item.acousticness,
-      instrumentalness: item.instrumentalness,
-      liveness: item.liveness,
-      valence: item.valence,
-      tempo: item.tempo,
-      duration_ms: item.duration_ms,
-    });
+  try {
+    // store response object and return items
+    const res = await axios(payload);
+    return res.data.audio_features;
+  } catch (error) {
+    console.log(error);
   }
-}
+};
 
-console.log(audioFeaturesMap);
+/**
+ * Gets audio features for artist's tracks
+ * key: track name, values: { track id }
+ */
+const getArtistAudioFeatures = async (accessToken, artistTracks) => {
+  // map to store track audio features
+  const audioFeaturesMap = new Map();
+
+  // iterate through ids in artistTracks and set as keys in map
+  for (const [key, value] of artistTracks) {
+    audioFeaturesMap.set(value.id, { name: key });
+  }
+
+  // genearate id groups to pass into api call
+  const idGroups = createIdStrings(artistTracks);
+
+  // retrieve audio features for each group of ids
+  for (const idGroup of idGroups) {
+    // get audio features for group
+    const groupAudioFeatures = await getGroupAudioFeatures(
+      accessToken,
+      idGroup
+    );
+
+    // add group's audio features to map
+    for (const track of groupAudioFeatures) {
+      audioFeaturesMap.set(track.id, {
+        ...audioFeaturesMap.get(track.id),
+        danceability: track.danceability,
+        energy: track.energy,
+        key: track.key,
+        loudness: track.loudness,
+        mode: track.mode,
+        speechiness: track.speechiness,
+        acousticness: track.acousticness,
+        instrumentalness: track.instrumentalness,
+        liveness: track.liveness,
+        valence: track.valence,
+        tempo: track.tempo,
+        duration_ms: track.duration_ms,
+      });
+    }
+  }
+
+  return audioFeaturesMap;
+};
+
+export default getArtistAudioFeatures;

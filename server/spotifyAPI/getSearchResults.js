@@ -1,43 +1,35 @@
-import getAccessToken from "./reqAccessToken.js";
 import qs from "qs";
 import axios from "axios";
 
-// generate access token
-const accessToken = await getAccessToken();
+// gets artist id for queried artist
+const getArtistId = async (accessToken, artistName) => {
+  // search query parameters
+  const queryURLParams = qs.stringify({
+    q: artistName,
+    type: "artist",
+    limit: 5,
+  });
 
-// search query parameters
-const queryParams = {
-  q: "Olivia Rodrigo",
-  type: "artist",
-  limit: 5,
-};
-const urlParams = qs.stringify(queryParams);
+  // payload for request to spotify api to get search results for queried artist
+  const payload = {
+    method: "GET",
+    url: `https://api.spotify.com/v1/search?${queryURLParams}`,
+    headers: {
+      // access token
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
+    },
+  };
 
-// payload for get request to retrieve search results
-const payload = {
-  method: "GET",
-  url: `https://api.spotify.com/v1/search?${urlParams}`,
-  headers: {
-    // access token
-    Authorization: `Bearer ${accessToken}`,
-    "Content-Type": "application/json",
-  },
-};
-
-// method to retrieve search results given query parameters
-const searchResults = async () => {
-  // axios GET request
   try {
     // store response object and return items
     const res = await axios(payload);
-    return res.data.artists.items;
+    const data = res.data.artists.items;
+    // return id for top artist result
+    return data[0].id;
   } catch (error) {
-    console.log(error);
+    console.log(error.response.data);
   }
 };
 
-const data = await searchResults();
-// save ID of top artist result and export
-const topResultID = data[0].id;
-
-export default topResultID;
+export default getArtistId;

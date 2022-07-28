@@ -4,6 +4,7 @@ import crypto from "crypto";
 import { spotifyClientId, spotifyAuthRedirectURI } from "../config.js";
 import getAccessToken from "../spotifyAPI/reqAccessToken.js";
 
+// generates secure state value
 const generateState = () => {
   const buf = crypto.randomBytes(32);
   return buf.toString("hex");
@@ -12,12 +13,12 @@ const generateState = () => {
 // initialize a router
 const router = express.Router();
 
+// handles base login route by redirecting to Spotify authentication page
 router.get("/", (req, res) => {
   const userAuthParams = qs.stringify({
     client_id: spotifyClientId,
     response_type: "code",
     redirect_uri: spotifyAuthRedirectURI,
-    // ! generate secure state value
     state: generateState(),
     scope: "user-top-read",
   });
@@ -27,11 +28,20 @@ router.get("/", (req, res) => {
 
 // callback route after authentication
 router.get("/callback", async (req, res) => {
-  const code = req.query.code;
-  const data = await getAccessToken(code);
-  console.log(data);
+  // save returned code and state values
+  const code = req.query.code || null;
+  const state = req.query.state || null;
 
-  res.send({ msg: "callback works" });
+  // check for wrong state value
+  if (state != null) {
+    const data = await getAccessToken(code);
+    console.log(data);
+
+    res.send({ msg: "callback works" });
+  } else {
+    // ! add error handling for null state
+    res.send({ error: "state mismatch" });
+  }
 });
 
 export default router;

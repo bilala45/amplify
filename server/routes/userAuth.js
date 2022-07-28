@@ -6,7 +6,16 @@ import { spotifyClientId, spotifyAuthRedirectURI } from "../config.js";
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  res.send("login route works");
+  const userAuthParams = qs.stringify({
+    client_id: spotifyClientId,
+    response_type: "code",
+    redirect_uri: spotifyAuthRedirectURI,
+    // ! generate secure state value
+    state: 1234567891234567,
+    scope: "user-top-read",
+  });
+
+  res.redirect(`https://accounts.spotify.com/authorize?${userAuthParams}`);
 });
 
 // callback route after authentication

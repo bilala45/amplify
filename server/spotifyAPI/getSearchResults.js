@@ -1,7 +1,9 @@
 import qs from "qs";
 import axios from "axios";
 
-// gets artist id for queried artist
+/**
+ * Returns artist id for top search result for queried artist
+ */
 const getArtistId = async (accessToken, artistName) => {
   // search query parameters
   const queryURLParams = qs.stringify({

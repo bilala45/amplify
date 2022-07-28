@@ -1,4 +1,8 @@
-import { spotifyClientId, spotifyClientSecret } from "../config.js";
+import {
+  spotifyClientId,
+  spotifyClientSecret,
+  spotifyAuthRedirectURI,
+} from "../config.js";
 import axios from "axios";
 import qs from "qs";
 
@@ -16,7 +20,14 @@ const getAuthorizationHeader = () => {
 /**
  * Requests and returns an access token from the Spotify API
  */
-const getAccessToken = async () => {
+const getAccessToken = async (code) => {
+  // search query parameters
+  const dataParams = qs.stringify({
+    grant_type: "authorization_code",
+    code: code,
+    redirect_uri: spotifyAuthRedirectURI,
+  });
+
   // request payload
   const payload = {
     method: "POST",
@@ -26,12 +37,12 @@ const getAccessToken = async () => {
       Authorization: getAuthorizationHeader(),
       "Content-Type": "application/x-www-form-urlencoded",
     },
-    data: qs.stringify({ grant_type: "client_credentials" }),
+    data: dataParams,
   };
 
   try {
     const res = await axios(payload);
-    return res.data.access_token;
+    return res.data;
   } catch (error) {
     console.log(error.response.data);
   }

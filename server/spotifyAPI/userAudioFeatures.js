@@ -2,6 +2,9 @@ import getAccessToken from "./reqAccessToken.js";
 import getUserTopTracks from "./getUserTopTracks.js";
 import getAudioFeatures from "./getTracksAudioFeatures.js";
 
+/**
+ * Retrieves audio features for a user's top tracks
+ */
 const getUserAudioFeatures = async (code) => {
   // generate access token
   const tokenData = await getAccessToken(code);

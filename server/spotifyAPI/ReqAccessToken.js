@@ -2,7 +2,7 @@ import { spotifyClientId, spotifyClientSecret } from "../config.js";
 import axios from "axios";
 import qs from "qs";
 
-// helper method to generate base64 encoded authorization string
+// helper method to generate base64 encoded authorization string for client credentials
 // format: Basic <base64 encoded client_id:client_secret>
 const getAuthorizationHeader = () => {
   // creates a buffer from client credentials and encodes in base64 string
@@ -13,25 +13,23 @@ const getAuthorizationHeader = () => {
   return `Basic ${clientCredsBase64}`;
 };
 
-// payload for post request to retrieve Spotify access token
-const payload = {
-  method: "POST",
-  url: "https://accounts.spotify.com/api/token",
-  headers: {
-    // client credentials
-    Authorization: getAuthorizationHeader(),
-    // format in which data object is sent
-    "Content-Type": "application/x-www-form-urlencoded",
-  },
-  // stringify data as url query string (according to content-type header)
-  data: qs.stringify({ grant_type: "client_credentials" }),
-};
-
-// post request to retrieve access token
+/**
+ * Requests and returns an access token from the Spotify API
+ */
 const getAccessToken = async () => {
-  // axios POST request
+  // request payload
+  const payload = {
+    method: "POST",
+    url: "https://accounts.spotify.com/api/token",
+    headers: {
+      // client credentials
+      Authorization: getAuthorizationHeader(),
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    data: qs.stringify({ grant_type: "client_credentials" }),
+  };
+
   try {
-    // store response object and return access token
     const res = await axios(payload);
     return res.data.access_token;
   } catch (error) {
@@ -39,8 +37,5 @@ const getAccessToken = async () => {
   }
 };
 
-const result = await getAccessToken();
-// export getAccessToken function for use by other
+// export method for use by other api calls
 export default getAccessToken;
-
-// MIGHT NOT NEED TO GENERATE NEW ACCESS TOKEN EVERY SINGLE TIME A CALL IS MADE (cache access token in database?)

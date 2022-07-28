@@ -45,7 +45,7 @@ const getGroupAudioFeatures = async (accessToken, idGroup) => {
     const res = await axios(payload);
     return res.data.audio_features;
   } catch (error) {
-    console.log(error);
+    console.log(error.response.data);
   }
 };
 

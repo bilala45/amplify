@@ -25,14 +25,13 @@ const reqAlbumTracks = async (accessToken, albumId) => {
     const res = await axios(payload);
     return res.data.items;
   } catch (error) {
-    console.log(error);
+    console.log(error.response.data);
   }
 };
 
 /**
  * Gets all tracks by an artist by querying tracks from artist albums
  * key: track name, values: { track id }
-
  */
 const getArtistTracks = async (accessToken, albumMap) => {
   const tracksMap = new Map();
@@ -40,7 +39,7 @@ const getArtistTracks = async (accessToken, albumMap) => {
   // iterate through values in albumMap, pull out the id and make a request using that id
   // iterate through the tracks and add each track to a hash map
   for (const value of albumMap.values()) {
-    const albumTracks = await reqAlbumTracks(accessToken, 5262525);
+    const albumTracks = await reqAlbumTracks(accessToken, value.id);
 
     // iterate through tracks in album and add to map
     for (const track of albumTracks) {

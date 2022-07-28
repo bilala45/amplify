@@ -4,17 +4,17 @@ import axios from "axios";
 /**
  * Helper method to generate array of track id strings in groups of 100
  */
-const createIdStrings = (artistTracks) => {
+const createIdStrings = (tracks) => {
   let trackIds = [];
 
   // iterate through ids in artistTracks
-  for (const track of artistTracks.values()) {
+  for (const track of tracks.values()) {
     trackIds.push(track.id);
   }
 
   // create groups of 100 songs to make requests for audio features
   const idGroups = [];
-  for (let i = 0; i < Math.ceil(artistTracks.size / 100); i++) {
+  for (let i = 0; i < Math.ceil(tracks.size / 100); i++) {
     // separate each group of 100 track ids
     const group = trackIds.slice(i * 100, i * 100 + 100).join(",");
     idGroups.push(group);
@@ -53,17 +53,17 @@ const getGroupAudioFeatures = async (accessToken, idGroup) => {
  * Gets audio features for artist's tracks
  * key: track name, values: { track id }
  */
-const getArtistAudioFeatures = async (accessToken, artistTracks) => {
+const getAudioFeatures = async (accessToken, tracks) => {
   // map to store track audio features
   const audioFeaturesMap = new Map();
 
   // iterate through ids in artistTracks and set as keys in map
-  for (const [key, value] of artistTracks) {
+  for (const [key, value] of tracks) {
     audioFeaturesMap.set(value.id, { name: key });
   }
 
   // generate id groups to pass into api call
-  const idGroups = createIdStrings(artistTracks);
+  const idGroups = createIdStrings(tracks);
 
   // retrieve audio features for each group of ids
   for (const idGroup of idGroups) {
@@ -96,4 +96,4 @@ const getArtistAudioFeatures = async (accessToken, artistTracks) => {
   return audioFeaturesMap;
 };
 
-export default getArtistAudioFeatures;
+export default getAudioFeatures;

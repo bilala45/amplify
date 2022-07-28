@@ -10,10 +10,10 @@ app.listen(port, () => {
   console.log(`Artist-recommender server listening on port ${port}`);
 });
 
-// home page
+// home page route
 app.get("/", (req, res) => {
   res.send("homepage route works");
 });
 
-// routes
+// user authentication routes
 app.use("/login", userAuth);

@@ -7,6 +7,7 @@ import getUserAudioFeatures from "../spotifyAPI/userAudioFeatures.js";
 // generates secure state value
 const generateState = () => {
   const buf = crypto.randomBytes(32);
+  // hex to avoid non-url safe characters
   return buf.toString("hex");
 };
 
@@ -23,6 +24,7 @@ router.get("/", (req, res) => {
     scope: "user-top-read",
   });
 
+  // redirect user to spotify authentication page
   res.redirect(`https://accounts.spotify.com/authorize?${userAuthParams}`);
 });
 
@@ -34,8 +36,8 @@ router.get("/callback", async (req, res) => {
 
   // check for wrong state value
   if (state != null) {
-    const userTopTracks = await getUserAudioFeatures(code);
-    res.send(userTopTracks);
+    const userAudioFeatures = await getUserAudioFeatures(code);
+    res.send("success");
   } else {
     // ! add error handling for null state
     res.send({ error: "state mismatch" });

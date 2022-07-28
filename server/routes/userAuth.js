@@ -3,6 +3,7 @@ import qs from "qs";
 import crypto from "crypto";
 import { spotifyClientId, spotifyAuthRedirectURI } from "../config.js";
 import getAccessToken from "../spotifyAPI/reqAccessToken.js";
+import getUserTopTracks from "../spotifyAPI/getUserTopTracks.js";
 
 // generates secure state value
 const generateState = () => {
@@ -34,10 +35,12 @@ router.get("/callback", async (req, res) => {
 
   // check for wrong state value
   if (state != null) {
+    // get access token
     const data = await getAccessToken(code);
-    console.log(data);
 
-    res.send({ msg: "callback works" });
+    // get user top tracks
+    const userTopTracks = await getUserTopTracks(data.access_token);
+    res.send(userTopTracks);
   } else {
     // ! add error handling for null state
     res.send({ error: "state mismatch" });

@@ -62,7 +62,7 @@ const getArtistAudioFeatures = async (accessToken, artistTracks) => {
     audioFeaturesMap.set(value.id, { name: key });
   }
 
-  // genearate id groups to pass into api call
+  // generate id groups to pass into api call
   const idGroups = createIdStrings(artistTracks);
 
   // retrieve audio features for each group of ids

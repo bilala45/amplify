@@ -4,6 +4,10 @@ import crypto from "crypto";
 import { spotifyClientId, spotifyAuthRedirectURI } from "../config.js";
 import getUserAudioFeatures from "../spotifyAPI/userAudioFeatures.js";
 
+/**
+ * handles /login routes
+ */
+
 // generates secure state value
 const generateState = () => {
   const buf = crypto.randomBytes(32);

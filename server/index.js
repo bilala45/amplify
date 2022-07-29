@@ -2,6 +2,7 @@ import { port } from "./config.js";
 import express from "express";
 import morgan from "morgan";
 import userAuthRoutes from "./routes/userAuth.js";
+import searchRoutes from "./routes/search.js";
 
 // create express app
 const app = express();
@@ -21,3 +22,6 @@ app.get("/", (req, res) => {
 
 // user authentication routes
 app.use("/login", userAuthRoutes);
+
+// search routes
+app.use("/search", searchRoutes);

@@ -8,11 +8,10 @@ import getAudioFeatures from "./getTracksAudioFeatures.js";
 const getUserAudioFeatures = async (code) => {
   // generate access token
   const tokenData = await getAccessToken(code);
-  const accessToken = tokenData.access_token || null;
+  const accessToken = tokenData.access_token;
 
   // pass access token to get user's top played tracks
   const userTopTracks = await getUserTopTracks(accessToken);
-  console.log(userTopTracks);
 
   // get track audio features as map
   const trackAudioFeatures = await getAudioFeatures(accessToken, userTopTracks);

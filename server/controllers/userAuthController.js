@@ -13,23 +13,27 @@ const redirectAfterAuth = (req, res) => {
     scope: "user-top-read",
   });
 
-  // redirect user to spotify authentication page
+  // returns 302 code (resource found)
   res.redirect(`https://accounts.spotify.com/authorize?${userAuthParams}`);
 };
 
 // retrieve user's top tracks and associated audio features
 const retrieveUserTracks = async (req, res) => {
-  // save returned code and state values
+  // redirect makes request to callback route with code and state values
   const code = req.query.code || null;
   const state = req.query.state || null;
 
-  // check for wrong state value
+  // check for mismatching state value
   if (state != null) {
-    const userAudioFeatures = await getUserAudioFeatures(code);
-    res.send("success");
+    // handle error in retrieving user's audio features
+    try {
+      const userAudioFeatures = await getUserAudioFeatures(code);
+      res.sendStatus(200);
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
   } else {
-    // ! add error handling for null state
-    res.send({ error: "state mismatch" });
+    res.status(400).json({ error: "state mismatch" });
   }
 };
 

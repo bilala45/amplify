@@ -2,7 +2,7 @@ import express from "express";
 import {
   redirectAfterAuth,
   retrieveUserTracks,
-} from "../controllers/userAuthController";
+} from "../controllers/userAuthController.js";
 
 /**
  * handles /login routes
@@ -11,7 +11,7 @@ import {
 // initialize a router
 const router = express.Router();
 
-// handles base login route by redirecting to Spotify authentication page
+// handles user authentication by redirecting to Spotify authentication page
 router.get("/", redirectAfterAuth);
 
 // callback route to main page (after authentication)

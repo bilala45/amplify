@@ -2,7 +2,7 @@ import {
   spotifyClientId,
   spotifyClientSecret,
   spotifyAuthRedirectURI,
-} from "../config.js";
+} from "../../config";
 import axios from "axios";
 import qs from "qs";
 

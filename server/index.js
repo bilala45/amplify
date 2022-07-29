@@ -1,4 +1,4 @@
-import { port } from "./config.js";
+import { port } from "../config.js";
 import express from "express";
 import morgan from "morgan";
 import userAuthRoutes from "./routes/userAuth.js";

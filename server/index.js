@@ -15,13 +15,15 @@ app.listen(port, () => {
 // logger middleware
 app.use(morgan("tiny"));
 
-// home page route
+// handles request to home page
 app.get("/", (req, res) => {
-  res.send("homepage route works");
+  // combines res.status(200).send('OK')
+  // if we just send res.status(200), the request hangs
+  res.sendStatus(200);
 });
 
-// user authentication routes
+// handles user authentication routes
 app.use("/login", userAuthRoutes);
 
-// search routes
+// handles search routes
 app.use("/search", searchRoutes);

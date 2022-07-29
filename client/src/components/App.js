@@ -1,10 +1,5 @@
-import Footer from "./Footer";
+import LoginPage from "./LoginPage";
 
-const App = () => (
-  <div className="App">
-    <h1 className="text-3xl font-bold underline">Hello world</h1>
-    <Footer />
-  </div>
-);
+const App = () => <LoginPage />;
 
 export default App;

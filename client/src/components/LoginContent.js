@@ -2,7 +2,6 @@ import ExampleWebpage from "../assets/Example-webpage.png";
 
 const LoginContent = () => (
   // entire content block is the width of the screen
-  // ! need to figure out height
   <div className="pt-20 -mt-20 h-screen pb-12 -mb-12">
     {/* split content into 3 columns using grid */}
     <div className="grid grid-cols-3 h-full gap-6">
@@ -36,6 +35,7 @@ const LoginContent = () => (
         <img
           className="rounded-lg max-w-full shadow-2xl shadow-slate-700"
           src={ExampleWebpage}
+          alt="Example webpage"
         ></img>
       </div>
     </div>

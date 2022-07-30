@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
 });
 
 // handles user authentication routes
-app.use("/login", userAuthRoutes);
+app.use("/api/login", userAuthRoutes);
 
 // handles search routes
-app.use("/search", searchRoutes);
+app.use("/api/search", searchRoutes);

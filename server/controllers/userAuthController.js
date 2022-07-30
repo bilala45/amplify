@@ -1,6 +1,6 @@
 import crypto from "crypto";
 import qs from "qs";
-import { spotifyClientId, spotifyAuthRedirectURI } from "../../config.js";
+import { spotifyClientId, spotifyAuthRedirectURI } from "../config.js";
 import getUserAudioFeatures from "../spotifyAPI/userAudioFeatures.js";
 
 // redirect user to spotify login page for authentication

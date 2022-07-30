@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-dotenv.config();
+dotenv.config({ path: "../.env" });
 
 const port = process.env.PORT;
 const spotifyClientId = process.env.CLIENT_ID;

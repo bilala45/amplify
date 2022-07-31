@@ -1,6 +1,15 @@
 import qs from "qs";
 import axios from "axios";
 
+// helper function to extract data from search results
+const artistJSONRes = (data) => {
+  return data.map((artist) => ({
+    name: artist.name,
+    id: artist.id,
+    img: artist.images[0].url,
+  }));
+};
+
 /**
  * Returns artist id for top search result for queried artist
  */
@@ -26,9 +35,8 @@ const getArtistId = async (accessToken, artistName) => {
   try {
     // store response object and return items
     const res = await axios(payload);
-    const data = res.data.artists.items;
-    // return id for top artist result
-    return data[0].id;
+    // return processed search results
+    return artistJSONRes(res.data.artists.items);
   } catch (error) {
     console.log(error.response.data);
   }

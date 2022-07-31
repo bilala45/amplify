@@ -1,7 +1,8 @@
 import SearchBar from "../components/SearchBar";
 
 const SearchPage = () => (
-  <div>
+  // encompassing content div
+  <div className="pt-20 -mt-20 h-screen pb-12 -mb-12">
     <SearchBar />
   </div>
 );

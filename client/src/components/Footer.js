@@ -6,10 +6,10 @@ const Footer = () => (
     <div>
       A project by{" "}
       <a
-        className="underline underline-offset-2 hover:decoration-2 hover:text-slate-100"
+        className="font-semibold hover:decoration-2 hover:text-slate-100"
         href="https://github.com/bilala45"
       >
-        Bilal Ali
+        @bilala45
       </a>
       .
     </div>

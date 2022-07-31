@@ -1,7 +1,7 @@
 import AlbumCover from "../assets/TheMelodicBlue.jpg";
 
 const SongResult = () => (
-  <span className="flex items-center max-w-screen-md max-h-16 rounded-xl bg-emerald-200 drop-shadow-xl shadow-black mt-8">
+  <span className="flex items-center max-w-screen-md max-h-16 rounded-xl bg-emerald-200 mt-8 drop-shadow-xl shadow-black">
     <img
       className="max-h-20 w-auto rounded-xl"
       src={AlbumCover}

@@ -10,22 +10,26 @@ const LoginContent = () => (
       <div className="col-span-1 px-6 self-center text-left">
         {/* tagline */}
         <div className="pb-14 text-3xl font-semibold">
-          A recommendation engine that helps you explore new artists,<br></br>{" "}
-          with a personal touch.
+          {/* A recommendation engine that helps you explore an artist's
+          discography, and find the songs that are uniquely you. A
+          recommendation engine that helps you better explore an artist's
+          discography. */}
+          A recommendation engine that helps you explore an artist's music, with
+          a personal touch.
         </div>
 
         {/* login button and about info (encompassed in one block) */}
         <div className="text-left">
           {/* spotify login button */}
-          <button className="w-52 font-medium text-lg border-0 rounded-xl py-2 mb-4 text-black bg-slate-200 hover:bg-black hover:text-slate-100">
+          <button className="w-52 font-medium text-lg border-0 rounded-full py-2 mb-4 text-black bg-slate-200 hover:bg-black hover:text-slate-100">
             Login with Spotify
           </button>
 
-          <div className="w-52">
+          <div className="w-52 text-center">
             {/* about info */}
-            <div className="text-sm text-center underline underline-offset-2 hover:decoration-2 hover:text-slate-100 hover:cursor-pointer">
+            <span className="text-sm underline underline-offset-2 hover:decoration-2 hover:text-slate-100 hover:cursor-pointer">
               Why do I need to login?
-            </div>
+            </span>
           </div>
         </div>
       </div>

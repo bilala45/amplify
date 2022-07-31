@@ -1,19 +1,20 @@
-import LoginPage from "./pages/LoginPage";
+import { Routes, Route } from "react-router-dom";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 import SearchPage from "./pages/SearchPage";
+import LoginPage from "./pages/LoginPage";
 import ResultsPage from "./pages/ResultsPage";
 
 const App = () => (
-  // set background color with div surrounding all content
-  // need h-screen so that div is the height of the entire screen (not just the height of the content inside it)
-  <div>
-    <div className="h-screen bg-gradient-to-r from-emerald-500 to-teal-500">
-      <LoginPage />
-    </div>
-    <div className="h-screen bg-gradient-to-r from-emerald-500 to-teal-500">
-      <SearchPage />
-    </div>
-    <div className="h-screen bg-gradient-to-r from-emerald-500 to-teal-500">
-      <ResultsPage />
+  <div className="bg-gradient-to-r from-emerald-500 to-teal-500">
+    <div className="h-screen max-w-screen-xl mx-auto px-14">
+      <Header />
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/search" element={<SearchPage />} />
+        <Route path="/results" element={<ResultsPage />} />
+      </Routes>
+      <Footer />
     </div>
   </div>
 );

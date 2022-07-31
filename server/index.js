@@ -1,19 +1,16 @@
 import { port } from "./config.js";
 import express from "express";
 import morgan from "morgan";
+import cors from "cors";
 import userAuthRoutes from "./routes/userAuth.js";
 import searchRoutes from "./routes/search.js";
 
 // create express app
 const app = express();
 
-// listen for requests at port
-app.listen(port, () => {
-  console.log(`Artist-recommender server listening on port ${port}`);
-});
-
-// logger middleware
+// middleware
 app.use(morgan("tiny"));
+app.use(cors());
 
 // handles request to home page
 app.get("/", (req, res) => {
@@ -27,3 +24,8 @@ app.use("/api/login", userAuthRoutes);
 
 // handles search routes
 app.use("/api/search", searchRoutes);
+
+// listen for requests at port
+app.listen(port, () => {
+  console.log(`Artist-recommender server listening on port ${port}`);
+});

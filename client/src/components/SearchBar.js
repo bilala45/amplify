@@ -1,8 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const SearchBar = () => {
   // state variables
   const [searchInput, setSearchInput] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+
+  // get search results from server
+  // runs after changes to searchInput state
+  useEffect(() => {
+    const getSearchResults = async () => {
+      const response = await axios.get("http://localhost:3001/api/search");
+      console.log(response);
+    };
+
+    getSearchResults();
+  }, [searchInput]);
 
   return (
     <div className="flex justify-center items-center h-12">

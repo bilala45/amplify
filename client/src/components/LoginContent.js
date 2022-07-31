@@ -33,7 +33,7 @@ const LoginContent = () => (
     </div>
 
     {/* site preview spans 2 of 3 grid columns */}
-    <div className="col-span-2 self-center pl-6">
+    <div className="col-span-2 self-center pr-6">
       <img
         className="rounded-lg max-w-full shadow-2xl shadow-slate-700"
         src={ExampleWebpage}

@@ -2,9 +2,11 @@ import { port } from "./config.js";
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
-import userAuthRoutes from "./routes/userAuth.js";
-import searchRoutes from "./routes/search.js";
 import cookieParser from "cookie-parser";
+import {
+  redirectAfterAuth,
+  getUserAccessToken,
+} from "../controllers/userAuthController.js";
 
 // create express app
 const app = express();
@@ -21,11 +23,29 @@ app.get("/", (req, res) => {
   res.sendStatus(200);
 });
 
-// handles user authentication routes
-app.use("/api/login", userAuthRoutes);
+/**
+ * User authentication routes
+ */
 
-// handles search routes
-app.use("/api/search", searchRoutes);
+// handles user authentication by redirecting to Spotify authentication page
+router.get("/api/login", redirectAfterAuth);
+
+// callback route to main page (after authentication)
+router.get("/callback", getUserAccessToken);
+
+/**
+ * Search routes
+ */
+
+// handles searches
+router.get("api/search", (req, res) => {
+  console.log(JSON.parse(JSON.stringify(req.cookies)));
+});
+
+// handles submitting during search
+router.get("api/search/submit", (req, res) => {
+  res.send("search submit route works");
+});
 
 // listen for requests at port
 app.listen(port, () => {

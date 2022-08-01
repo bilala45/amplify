@@ -28,12 +28,17 @@ const retrieveUserTracks = async (req, res) => {
     // handle error in retrieving user's audio features
     try {
       const userAudioFeatures = await getUserAudioFeatures(code);
-      res.sendStatus(200);
+      console.log(userAudioFeatures);
+      res.status(200);
+      res.redirect("http://localhost:3000/search");
     } catch (error) {
-      res.status(400).json({ error: error.message });
+      // redirect user to home page
+      // ! should probably redirect to home page if an error occurs with retrieving the user data
+      res.status(400).redirect("http://localhost:3000");
     }
   } else {
-    res.status(400).json({ error: "state mismatch" });
+    // redirect user to home page if state mismatch
+    res.status(400).redirect("http://localhost:3000");
   }
 };
 

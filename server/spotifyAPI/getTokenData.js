@@ -20,7 +20,7 @@ const getAuthorizationHeader = () => {
 /**
  * Requests and returns an access token from the Spotify API
  */
-const getAccessToken = async (code) => {
+const getTokenData = async (code) => {
   // search query parameters
   const dataParams = qs.stringify({
     grant_type: "authorization_code",
@@ -49,4 +49,4 @@ const getAccessToken = async (code) => {
 };
 
 // export method for use by other api calls
-export default getAccessToken;
+export default getTokenData;

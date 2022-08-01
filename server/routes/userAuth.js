@@ -1,7 +1,7 @@
 import express from "express";
 import {
   redirectAfterAuth,
-  retrieveUserTracks,
+  getUserAccessToken,
 } from "../controllers/userAuthController.js";
 
 /**
@@ -15,6 +15,6 @@ const router = express.Router();
 router.get("/", redirectAfterAuth);
 
 // callback route to main page (after authentication)
-router.get("/callback", retrieveUserTracks);
+router.get("/callback", getUserAccessToken);
 
 export default router;

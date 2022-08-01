@@ -4,6 +4,7 @@ import morgan from "morgan";
 import cors from "cors";
 import userAuthRoutes from "./routes/userAuth.js";
 import searchRoutes from "./routes/search.js";
+import cookieParser from "cookie-parser";
 
 // create express app
 const app = express();
@@ -11,6 +12,7 @@ const app = express();
 // middleware
 app.use(morgan("tiny"));
 app.use(cors());
+app.use(cookieParser());
 
 // handles request to home page
 app.get("/", (req, res) => {

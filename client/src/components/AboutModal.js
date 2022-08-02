@@ -1,18 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { setUserCreds } from "../spotify.js";
 
 const AboutModal = () => {
-  const [accessToken, setAccessToken] = useState(null);
-
-  // retrieve tokens from url params
+  // retrieve tokens from url params on initial render
   useEffect(() => {
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const accessToken = urlParams.get("access_token");
-    const refreshToken = urlParams.get("refresh_token");
-    console.log(accessToken);
-
-    setAccessToken(accessToken);
+    setUserCreds();
   }, []);
 
   // router hook to navigate to different react page

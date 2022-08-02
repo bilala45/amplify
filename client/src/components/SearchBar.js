@@ -51,6 +51,7 @@ const SearchBar = () => {
               id={artist.id}
               name={artist.name}
               img={artist.img}
+              setSearchInput={setSearchInput}
             />
           ))}
       </div>

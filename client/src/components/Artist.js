@@ -1,8 +1,11 @@
 import { getAccessToken } from "../spotify.js";
 import axios from "axios";
 
-const Artist = ({ id, name, img }) => {
+const Artist = ({ id, name, img, setSearchInput }) => {
   const handleArtistClick = async () => {
+    // closes search results window after submitting a search
+    setSearchInput("");
+
     // retrieve access token from local storage
     const accessToken = getAccessToken();
 

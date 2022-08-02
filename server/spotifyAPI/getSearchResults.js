@@ -13,7 +13,7 @@ const artistJSONRes = (data) => {
 /**
  * Returns artist id for top search result for queried artist
  */
-const getArtistId = async (accessToken, artistName) => {
+const getSearchResults = async (accessToken, artistName) => {
   // search query parameters
   const queryURLParams = qs.stringify({
     q: artistName,
@@ -42,4 +42,4 @@ const getArtistId = async (accessToken, artistName) => {
   }
 };
 
-export default getArtistId;
+export default getSearchResults;

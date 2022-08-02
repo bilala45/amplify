@@ -7,8 +7,9 @@ import cookieParser from "cookie-parser";
 import {
   redirectAfterAuth,
   getUserAccessToken,
-  refreshUserToken,
 } from "./controllers/userAuthController.js";
+import getSearchResults from "./spotifyAPI/getSearchResults.js";
+import getArtistAudioFeatures from "./spotifyAPI/searchAudioFeatures.js";
 
 // create express app
 const app = express();
@@ -38,21 +39,24 @@ app.get("/api/login", redirectAfterAuth);
 // callback route to main page (after authentication)
 app.get("/api/login/callback", getUserAccessToken);
 
-// refreshes token after expiry
-app.get("/api/login/refreshToken", refreshUserToken);
-
 /**
  * Search routes
  */
 
 // handles searches
-app.get("/api/search", (req, res) => {
-  res.send("search working");
+app.get("/api/search", async (req, res) => {
+  const { accessToken, searchInput } = req.query;
+  const artistsObj = await getSearchResults(accessToken, searchInput);
+  console.log(artistsObj);
+  res.json(artistsObj);
 });
 
 // handles submitting during search
-app.get("/api/search/submit", (req, res) => {
-  res.send("search submit route works");
+app.get("/api/search/submit", async (req, res) => {
+  const { accessToken, artistId } = req.query;
+  const artistDiscObj = await getArtistAudioFeatures(accessToken, artistId);
+  console.log(artistDiscObj);
+  res.send(artistDiscObj);
 });
 
 // listen for requests at port

@@ -44,9 +44,41 @@ const getTokenData = async (code) => {
     const res = await axios(payload);
     return res.data;
   } catch (error) {
+    // ! send error response back in a string format so that it can be added to the homepage url
+    console.log(error.response.data);
+  }
+};
+
+/**
+ * Requests and returns an access token using the refresh token from the Spotify API
+ */
+const getRefreshAccessToken = async (refreshToken) => {
+  // search query parameters
+  const dataParams = qs.stringify({
+    grant_type: "refresh_token",
+    refresh_token: refreshToken,
+  });
+
+  // request payload
+  const payload = {
+    method: "POST",
+    url: "https://accounts.spotify.com/api/token",
+    headers: {
+      // client credentials
+      Authorization: getAuthorizationHeader(),
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    data: dataParams,
+  };
+
+  try {
+    const res = await axios(payload);
+    return res.data;
+  } catch (error) {
+    // ! send error response back in a string format so that it can be added to the homepage url
     console.log(error.response.data);
   }
 };
 
 // export method for use by other api calls
-export default getTokenData;
+export { getTokenData, getRefreshAccessToken };

@@ -2,18 +2,23 @@ import { port } from "./config.js";
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
+import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import {
   redirectAfterAuth,
   getUserAccessToken,
-} from "../controllers/userAuthController.js";
+  refreshUserToken,
+} from "./controllers/userAuthController.js";
 
 // create express app
 const app = express();
 
-// middleware
-app.use(morgan("tiny"));
-app.use(cors());
+// security middleware
+app.use(helmet()); // protect tech stack
+app.use(cors()); // allow client requests
+
+// misc middleware
+app.use(morgan("tiny")); // logger
 app.use(cookieParser());
 
 // handles request to home page
@@ -28,22 +33,25 @@ app.get("/", (req, res) => {
  */
 
 // handles user authentication by redirecting to Spotify authentication page
-router.get("/api/login", redirectAfterAuth);
+app.get("/api/login", redirectAfterAuth);
 
 // callback route to main page (after authentication)
-router.get("/callback", getUserAccessToken);
+app.get("/api/login/callback", getUserAccessToken);
+
+// refreshes token after expiry
+app.get("/api/login/refreshToken", refreshUserToken);
 
 /**
  * Search routes
  */
 
 // handles searches
-router.get("api/search", (req, res) => {
-  console.log(JSON.parse(JSON.stringify(req.cookies)));
+app.get("/api/search", (req, res) => {
+  res.send(req.cookies);
 });
 
 // handles submitting during search
-router.get("api/search/submit", (req, res) => {
+app.get("/api/search/submit", (req, res) => {
   res.send("search submit route works");
 });
 

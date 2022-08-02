@@ -19,8 +19,9 @@ const AboutModal = () => {
           artist. Discover will look through the artist's discography and return
           the songs we think you'll like best.
         </div>
+        <div className="text-lg pt-4 pb-6 text-center">Happy discovering!</div>
         <button
-          className="bg-slate-700 w-40 text-white rounded-full py-2 mt-6 mb-8 hover:bg-gradient-to-r from-emerald-500 to-teal-500 hover:text-black"
+          className="bg-slate-700 w-40 text-white rounded-full py-2 mb-8 text-sm hover:bg-gradient-to-r from-emerald-500 to-teal-500 hover:text-black"
           onClick={() => {
             navigate("/search");
           }}

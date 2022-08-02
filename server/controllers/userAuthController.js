@@ -38,14 +38,14 @@ const getUserAccessToken = async (req, res) => {
     try {
       // generate access token
       const tokenData = await getTokenData(code);
-      const { access_token, refresh_token } = tokenData;
+      const { access_token, expires_in } = tokenData;
 
       const queryParams = qs.stringify({
         access_token,
-        refresh_token,
+        expires_in,
       });
 
-      res.redirect(`http://localhost:3000/search?${queryParams}`);
+      res.redirect(`http://localhost:3000/about?${queryParams}`);
     } catch (error) {
       // redirect user to home page
       // ! should probably redirect to home page if an error occurs with retrieving the user data
@@ -58,20 +58,4 @@ const getUserAccessToken = async (req, res) => {
   }
 };
 
-// retrieve user's top tracks and associated audio features
-const refreshUserToken = async (req, res) => {
-  try {
-    // generate access token
-    const tokenData = await getRefreshAccessToken(refreshToken);
-    const accessToken = tokenData.access_token;
-
-    res.json(tokenData);
-    //res.redirect("http://localhost:3000/results");
-  } catch (error) {
-    // redirect user to home page
-    // ! should probably redirect to home page if an error occurs with retrieving the user data
-    res.status(400).redirect("http://localhost:3000");
-  }
-};
-
-export { redirectAfterAuth, getUserAccessToken, refreshUserToken };
+export { redirectAfterAuth, getUserAccessToken };

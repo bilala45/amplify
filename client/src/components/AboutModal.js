@@ -1,6 +1,20 @@
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 const AboutModal = () => {
+  const [accessToken, setAccessToken] = useState(null);
+
+  // retrieve tokens from url params
+  useEffect(() => {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const accessToken = urlParams.get("access_token");
+    const refreshToken = urlParams.get("refresh_token");
+    console.log(accessToken);
+
+    setAccessToken(accessToken);
+  }, []);
+
   // router hook to navigate to different react page
   const navigate = useNavigate();
 

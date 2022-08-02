@@ -47,7 +47,7 @@ app.get("/api/login/refreshToken", refreshUserToken);
 
 // handles searches
 app.get("/api/search", (req, res) => {
-  res.send(req.cookies);
+  res.send("search working");
 });
 
 // handles submitting during search

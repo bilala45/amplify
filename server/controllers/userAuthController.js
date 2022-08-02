@@ -38,11 +38,14 @@ const getUserAccessToken = async (req, res) => {
     try {
       // generate access token
       const tokenData = await getTokenData(code);
-      const accessToken = tokenData.access_token;
-      const refreshToken = tokenData.refresh_token;
+      const { access_token, refresh_token } = tokenData;
 
-      res.json(tokenData);
-      //res.redirect("http://localhost:3000/results");
+      const queryParams = qs.stringify({
+        access_token,
+        refresh_token,
+      });
+
+      res.redirect(`http://localhost:3000/search?${queryParams}`);
     } catch (error) {
       // redirect user to home page
       // ! should probably redirect to home page if an error occurs with retrieving the user data

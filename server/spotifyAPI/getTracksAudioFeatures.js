@@ -2,47 +2,44 @@ import qs from "qs";
 import axios from "axios";
 
 /**
- * Helper method to generate array of track id strings in groups of 100
+ * Helper method to create groups of 100 track ids
+ * @param tracks Array of tracks
+ * @returns []
  */
 const createIdStrings = (tracks) => {
-  let trackIds = [];
+  // array of track ids
+  const trackIds = tracks.map((track) => {
+    return track.id;
+  });
 
-  // iterate through ids in artistTracks
-  for (const track of tracks.values()) {
-    trackIds.push(track.id);
-  }
-
-  // create groups of 100 songs to make requests for audio features
+  // create groups of 100 songs as elements in array
   const idGroups = [];
-  for (let i = 0; i < Math.ceil(tracks.size / 100); i++) {
-    // separate each group of 100 track ids
-    const group = trackIds.slice(i * 100, i * 100 + 100).join(",");
-    idGroups.push(group);
+  while (trackIds.length) {
+    idGroups.push(trackIds.splice(0, 100).join(","));
   }
 
   return idGroups;
 };
 
 /**
- * Helper method to get audio features for a group of tracks
+ * Queries Spotify API for tracks' audio features
+ * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-several-audio-features
+ * @param accessToken Access token provided after auth
+ * @param idGroup Group of track ids (up to 100 ids)
+ * @returns [Promise]
  */
-const getGroupAudioFeatures = async (accessToken, idGroup) => {
-  // query parameters
-  const audioFeatureParams = qs.stringify({ ids: idGroup });
-
-  // payload for get request to Spotify API to retrieve track audio features
-  const payload = {
-    method: "GET",
-    url: `https://api.spotify.com/v1/audio-features?${audioFeatureParams}`,
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      "Content-Type": "application/json",
-    },
-  };
+const reqTracksAudioFeatures = async (accessToken, idGroup) => {
+  const queryParams = qs.stringify({ ids: idGroup });
 
   try {
-    // store response object and return items
-    const res = await axios(payload);
+    const res = await axios({
+      method: "GET",
+      url: `https://api.spotify.com/v1/audio-features?${queryParams}`,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    });
     return res.data.audio_features;
   } catch (error) {
     console.log(error.response.data);
@@ -50,33 +47,35 @@ const getGroupAudioFeatures = async (accessToken, idGroup) => {
 };
 
 /**
- * Gets audio features for artist's tracks
- * key: track name, values: { track id }
+ * Gets audio features for an array of tracks
+ * @param accessToken Access token provided after auth
+ * @param tracks Array of tracks
+ * @returns [Promise]
  */
-const getAudioFeatures = async (accessToken, tracks) => {
-  // map to store track audio features
-  const audioFeaturesMap = new Map();
-
-  // iterate through ids in artistTracks and set as keys in map
-  for (const [key, value] of tracks) {
-    audioFeaturesMap.set(value.id, { name: key });
+const getTracksAudioFeatures = async (accessToken, tracks) => {
+  // iterate through ids in tracks and set as keys that map to track's name
+  // audio features endpoint doesn't return the track name so we use the id to find the song name
+  const audioFeaturesMap = {};
+  for (const track of tracks) {
+    audioFeaturesMap[track.id] = track.name;
   }
 
-  // generate id groups to pass into api call
+  // create id groups to pass to api call
   const idGroups = createIdStrings(tracks);
 
-  // retrieve audio features for each group of ids
+  // retrieve audio features for each id in idGroups and add to array
+  const trackAudioFeatures = [];
   for (const idGroup of idGroups) {
-    // get audio features for group
-    const groupAudioFeatures = await getGroupAudioFeatures(
+    const groupAudioFeatures = await reqTracksAudioFeatures(
       accessToken,
       idGroup
     );
 
-    // add group's audio features to map
+    // add each track's audio features to array
     for (const track of groupAudioFeatures) {
-      audioFeaturesMap.set(track.id, {
-        ...audioFeaturesMap.get(track.id),
+      trackAudioFeatures.push({
+        name: audioFeaturesMap[track.id],
+        id: track.id,
         danceability: track.danceability,
         energy: track.energy,
         key: track.key,
@@ -88,12 +87,11 @@ const getAudioFeatures = async (accessToken, tracks) => {
         liveness: track.liveness,
         valence: track.valence,
         tempo: track.tempo,
-        duration_ms: track.duration_ms,
       });
     }
   }
 
-  return audioFeaturesMap;
+  return trackAudioFeatures;
 };
 
-export default getAudioFeatures;
+export default getTracksAudioFeatures;

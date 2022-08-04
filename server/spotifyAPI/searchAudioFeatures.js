@@ -3,7 +3,10 @@ import getArtistTracks from "./getArtistTracks.js";
 import getTracksAudioFeatures from "./getTracksAudioFeatures.js";
 
 /**
- * Retrieves audio features for all tracks by some artist
+ * Gets audio features for all tracks in an artist's discography
+ * @param accessToken Access token provided after auth
+ * @param artistId The artist's Spotify ID
+ * @returns []
  */
 const getArtistAudioFeatures = async (accessToken, artistId) => {
   // get artist albums as array
@@ -20,10 +23,5 @@ const getArtistAudioFeatures = async (accessToken, artistId) => {
 
   return tracksAudioFeatures;
 };
-
-// getArtistAudioFeatures(
-//   "BQBJblbpCfYeQCSPKh2gpX302osl4CwCby3rmxQw--iALoLoh_jdOUO75PVzjrwswITQOukSLE0bdFGDhyLZkwtPTL0irlDrqvt1Cj6e_XQYyiYkPutK9HVAHv0x-0xLaNHMcTwvsiQT4xAFSCeUkzXF0--eAaGWoQDdKUrJQPoq1zM",
-//   "66CXWjxzNUsdJxJ2JdwvnR"
-// );
 
 export default getArtistAudioFeatures;

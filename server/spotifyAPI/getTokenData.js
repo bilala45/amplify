@@ -6,10 +6,12 @@ import {
 import axios from "axios";
 import qs from "qs";
 
-// helper method to generate base64 encoded authorization string for client credentials
-// format: Basic <base64 encoded client_id:client_secret>
+/**
+ * Creates base64-encoded authorization string for authorization flow
+ * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-an-albums-tracks
+ * @returns String
+ */
 const getAuthorizationHeader = () => {
-  // creates a buffer from client credentials and encodes in base64 string
   const clientCredsBase64 = Buffer.from(
     `${spotifyClientId}:${spotifyClientSecret}`,
     "utf-8"
@@ -18,67 +20,32 @@ const getAuthorizationHeader = () => {
 };
 
 /**
- * Requests and returns an access token from the Spotify API
+ * Returns access token from Spotify API
+ * https://developer.spotify.com/documentation/general/guides/authorization/code-flow/
+ * @param code Code provided in response to user log in
+ * @returns {Promise}
  */
 const getTokenData = async (code) => {
-  // search query parameters
   const dataParams = qs.stringify({
     grant_type: "authorization_code",
     code: code,
     redirect_uri: spotifyAuthRedirectURI,
   });
 
-  // request payload
-  const payload = {
-    method: "POST",
-    url: "https://accounts.spotify.com/api/token",
-    headers: {
-      // client credentials
-      Authorization: getAuthorizationHeader(),
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    data: dataParams,
-  };
-
   try {
-    const res = await axios(payload);
+    const res = await axios({
+      method: "POST",
+      url: "https://accounts.spotify.com/api/token",
+      headers: {
+        Authorization: getAuthorizationHeader(),
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      data: dataParams,
+    });
     return res.data;
   } catch (error) {
-    // ! send error response back in a string format so that it can be added to the homepage url
     console.log(error.response.data);
   }
 };
 
-/**
- * Requests and returns an access token using the refresh token from the Spotify API
- */
-const getRefreshAccessToken = async (refreshToken) => {
-  // search query parameters
-  const dataParams = qs.stringify({
-    grant_type: "refresh_token",
-    refresh_token: refreshToken,
-  });
-
-  // request payload
-  const payload = {
-    method: "POST",
-    url: "https://accounts.spotify.com/api/token",
-    headers: {
-      // client credentials
-      Authorization: getAuthorizationHeader(),
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    data: dataParams,
-  };
-
-  try {
-    const res = await axios(payload);
-    return res.data;
-  } catch (error) {
-    // ! send error response back in a string format so that it can be added to the homepage url
-    console.log(error.response.data);
-  }
-};
-
-// export method for use by other api calls
-export { getTokenData, getRefreshAccessToken };
+export default getTokenData;

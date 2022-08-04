@@ -1,10 +1,7 @@
 import crypto from "crypto";
 import qs from "qs";
 import { spotifyClientId, spotifyAuthRedirectURI } from "../config.js";
-import {
-  getTokenData,
-  getRefreshAccessToken,
-} from "../spotifyAPI/getTokenData.js";
+import getTokenData from "../spotifyAPI/getTokenData.js";
 
 // redirect user to spotify login page for authentication
 const redirectAfterAuth = (req, res) => {

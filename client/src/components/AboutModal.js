@@ -15,16 +15,14 @@ const AboutModal = () => {
     <div className="h-full w-full flex items-center justify-center">
       <div className="bg-slate-200 rounded-xl px-14 pt-10 text-center max-w-screen-md">
         <h1 className="text-3xl font-semibold text-teal-600">
-          Welcome to discover!
+          Welcome to amplify!
         </h1>
-        <div className="text-lg pt-4 text-left">
-          Here's a quick primer to make sure we're all on the same page.
+        <div className="text-xl pt-4 text-left">
+          Let's make sure we're all on the same page.
         </div>
-        <div className="text-lg pt-2 text-left">
-          Discover uses your listening history to generate artist-specific
-          recommendations. To get started, use the search bar to look up an
-          artist. Discover will look through the artist's discography and return
-          the songs we think you'll like best.
+        <div className="text-xl pt-4 text-left">
+          Use the search bar to look up an artist. We'll use your listening
+          history to find 5 songs by that artist that we think you'll like best.
         </div>
         <div className="text-lg pt-4 pb-6 text-center">Happy discovering!</div>
         <button

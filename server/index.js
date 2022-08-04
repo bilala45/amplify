@@ -3,7 +3,6 @@ import express from "express";
 import morgan from "morgan";
 import cors from "cors";
 import helmet from "helmet";
-import cookieParser from "cookie-parser";
 import {
   redirectAfterAuth,
   getUserAccessToken,
@@ -20,7 +19,6 @@ app.use(cors()); // allow client requests
 
 // misc middleware
 app.use(morgan("tiny")); // logger
-app.use(cookieParser());
 
 // handles request to home page
 app.get("/", (req, res) => {
@@ -47,7 +45,6 @@ app.get("/api/login/callback", getUserAccessToken);
 app.get("/api/search", async (req, res) => {
   const { accessToken, searchInput } = req.query;
   const artistsObj = await getSearchResults(accessToken, searchInput);
-  console.log(artistsObj);
   res.json(artistsObj);
 });
 
@@ -55,7 +52,6 @@ app.get("/api/search", async (req, res) => {
 app.get("/api/search/submit", async (req, res) => {
   const { accessToken, artistId } = req.query;
   const artistDiscObj = await getArtistAudioFeatures(accessToken, artistId);
-  console.log(artistDiscObj);
   res.send(artistDiscObj);
 });
 

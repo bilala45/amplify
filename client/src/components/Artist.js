@@ -9,8 +9,6 @@ const Artist = ({ id, name, img, setSearchInput }) => {
   }
 
   const handleArtistClick = async () => {
-    console.log(id);
-
     // closes search results window after submitting a search
     setSearchInput("");
 

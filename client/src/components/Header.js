@@ -6,7 +6,7 @@ const Header = () => (
   // header stops growing at 1280px screen (auto margin fills margin accordingly after that size)
   <header className="flex justify-between items-center h-20">
     {/* title */}
-    <h1 className="text-4xl font-semibold tracking-widest">discover</h1>
+    <h1 className="text-4xl font-semibold text-">amplify</h1>
     {/* spotify logo */}
     <img className="h-12" src={SpotifyLogo} alt="Spotify logo"></img>
   </header>

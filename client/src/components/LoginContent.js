@@ -8,9 +8,17 @@ const LoginContent = () => {
           Place all items inside one div tag (this is where we specify 1 column) */}
       <div className="col-span-1 px-6 self-center text-left">
         {/* tagline */}
-        <div className="pb-12 text-3xl font-semibold">
+        {/* <div className="pb-12 text-3xl font-semibold">
           A recommendation engine that helps you explore an artist's music, with
           a personal touch.
+          Getting familiar with a new artist shouldn't be this hard.
+          Because you shouldn't have to listen to an artist's entire discography
+          to find the songs that are uniquely you.
+          Spend your time listening to an artist's music, not looking through it.
+        </div> */}
+        <div className="pb-12 text-4xl font-semibold">
+          Spend your time listening to an artist's music, not looking through
+          it.
         </div>
 
         <a

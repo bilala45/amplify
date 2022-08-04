@@ -1,21 +1,23 @@
-import getAccessToken from "./reqAccessToken.js";
 import getUserTopTracks from "./getUserTopTracks.js";
-import getAudioFeatures from "./getTracksAudioFeatures.js";
+import getTracksAudioFeatures from "./getTracksAudioFeatures.js";
 
 /**
- * Retrieves audio features for a user's top tracks
+ * Gets audio features for a user's top tracks
+ * @param accessToken Access token provided after auth
+ * @returns []
  */
-const getUserAudioFeatures = async (code) => {
-  // generate access token
-  const tokenData = await getAccessToken(code);
-  const accessToken = tokenData.access_token;
-
-  // pass access token to get user's top played tracks
+const getUserAudioFeatures = async (accessToken) => {
+  // get user's top tracks as an array
   const userTopTracks = await getUserTopTracks(accessToken);
 
-  // get track audio features as map
-  const trackAudioFeatures = await getAudioFeatures(accessToken, userTopTracks);
-  //console.log(trackAudioFeatures);
+  // get track audio features as array
+  const trackAudioFeatures = await getTracksAudioFeatures(
+    accessToken,
+    userTopTracks
+  );
+
+  console.log(trackAudioFeatures);
+
   return trackAudioFeatures;
 };
 

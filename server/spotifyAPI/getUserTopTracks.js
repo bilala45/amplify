@@ -1,29 +1,28 @@
 import qs from "qs";
 import axios from "axios";
 
-// retrieve user's top tracks
+/**
+ * Queries the Spotify API for a user's top tracks
+ * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-users-top-artists-and-tracks
+ * @param accessToken Access token provided after auth
+ * @returns [Promise]
+ */
 const reqUserTopTracks = async (accessToken) => {
-  // top tracks parameters
-  const userTopTracksParams = qs.stringify({
-    // top tracks from approximately last 6 months
+  const queryParams = qs.stringify({
+    // top 50 tracks from approximately last 6 months
     time_range: "medium_term",
     limit: 50,
   });
 
-  // payload for get request to retrieve results of artist albums query
-  const payload = {
-    method: "GET",
-    url: `https://api.spotify.com/v1/me/top/tracks/?${userTopTracksParams}`,
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      "Content-Type": "application/json",
-    },
-  };
-
-  // axios GET request
   try {
-    // store response object and return items
-    const res = await axios(payload);
+    const res = await axios({
+      method: "GET",
+      url: `https://api.spotify.com/v1/me/top/tracks/?${queryParams}`,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    });
     return res.data.items;
   } catch (error) {
     console.log(error.response.data);
@@ -31,19 +30,19 @@ const reqUserTopTracks = async (accessToken) => {
 };
 
 /**
- * Generates map of user's top tracks
- * key: track name, values: { track id }
+ * Processes user's top tracks
+ * @param accessToken Access token provided after auth
+ * @returns [array of objects]
  */
 const getUserTopTracks = async (accessToken) => {
-  const tracksMap = new Map();
   const userTracks = await reqUserTopTracks(accessToken);
 
-  // iterate through tracks in album and add to map
+  const tracksArr = [];
   for (const track of userTracks) {
-    tracksMap.set(track.name, { id: track.id });
+    tracksArr.push({ name: track.name, id: track.id });
   }
 
-  return tracksMap;
+  return tracksArr;
 };
 
 export default getUserTopTracks;

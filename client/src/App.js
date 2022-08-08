@@ -9,16 +9,16 @@ import SearchPage from "./pages/SearchPage";
 import ResultsPage from "./pages/ResultsPage";
 
 const App = () => (
-  <div className="bg-gradient-to-r from-emerald-500 to-teal-500">
-    <div className="h-screen max-w-screen-xl mx-auto px-14">
-      <Header />
+  <div className="bg-gradient-to-r from-emerald-500 to-teal-500 px-8 sm:px-14 min-h-screen">
+    <Header />
+    <div className="max-w-screen-xl mx-auto">
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/results" element={<ResultsPage />} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   </div>
 );

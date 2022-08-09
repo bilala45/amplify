@@ -14,24 +14,24 @@ const AboutModal = () => {
 
   return (
     <div className="flex justify-center">
-      <div className="bg-slate-200 rounded-md mb-24 px-8 md:px-14 py-10 text-center max-w-screen-md shadow-2xl shadow-slate-700">
-        <h1 className="text-2xl sm:text-3xl font-semibold text-teal-600">
+      <div className="bg-slate-200 rounded-md mb-24 px-6 md:px-14 py-10 text-center max-w-screen-md shadow-2xl shadow-slate-700">
+        <h1 className="text-2xl sm:text-3xl font-semibold">
           Welcome to amplify!
         </h1>
         <div className="text-md sm:text-lg text-left">
-          <div className="pt-6 sm:pt-6 sm:text-center">
+          <div className="pt-6 sm:pt-6 text-center">
             Let's make sure we're all on the same page.
           </div>
 
           <div className="hidden sm:block">
             <div className="grid grid-cols-3 justify-items-center pt-10 text-2xl gap-8">
-              <div className="col-span-1">
+              <div className="col-span-1 text-teal-600">
                 <BsSearch />
               </div>
-              <div className="col-span-1">
+              <div className="col-span-1 text-teal-600">
                 <BsMusicNote />
               </div>
-              <div className="col-span-1">
+              <div className="col-span-1 text-teal-600">
                 <BsCollectionPlay />
               </div>
             </div>
@@ -50,21 +50,21 @@ const AboutModal = () => {
             </div>
           </div>
 
-          <div className="sm:hidden">
-            <div className="pt-4 flex justify-between items-center">
-              <BsSearch className="text-xl mr-[18px]" />
+          <div className="sm:hidden mx-2">
+            <div className="pt-8 flex justify-between items-center">
+              <BsSearch className="text-xl mr-6 text-teal-600" />
               <div>Use the search bar to search for an artist.</div>
             </div>
 
             <div className="pt-4 flex justify-between items-center">
-              <BsMusicNote className="text-3xl mr-4" />
+              <BsMusicNote className="text-3xl mr-6 text-teal-600" />
               <div>
                 We'll analyze your listening history from the last 6 months.
               </div>
             </div>
 
             <div className="pt-4 flex justify-between items-center">
-              <BsCollectionPlay className="text-3xl mr-4" />
+              <BsCollectionPlay className="text-3xl mr-6 text-teal-600" />
               <div>
                 You'll get 5 songs by that artist that we think you'll like
                 best.

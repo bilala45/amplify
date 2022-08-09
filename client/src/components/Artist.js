@@ -2,7 +2,7 @@ import { getAccessToken } from "../spotify.js";
 import blankProfile from "../assets/blank-profile.png";
 import axios from "axios";
 
-const Artist = ({ id, name, img, setSearchInput }) => {
+const Artist = ({ id, name, img, setSearchInput, setArtistTracks }) => {
   // handle artists with no image
   if (!img.length) {
     img = blankProfile;
@@ -23,19 +23,22 @@ const Artist = ({ id, name, img, setSearchInput }) => {
       }
     );
     console.log(response);
+    setArtistTracks(response.data);
   };
 
   return (
     <button
       onClick={handleArtistClick}
-      className="h-[4.5rem] flex items-center w-full hover:bg-emerald-300 hover:rounded-md hover:cursor-pointer"
+      className="h-[4.5rem] flex items-center text-left w-full hover:bg-emerald-300 hover:cursor-pointer"
     >
       <img
         className="ml-3 max-h-14 w-14 rounded-full"
         src={img}
         alt={name}
       ></img>
-      <div className="text-lg font-bold tracking-wider pl-4 pr-8">{name}</div>
+      <div className="text-md sm:text-lg font-bold tracking-wider pl-4 pr-8">
+        {name}
+      </div>
     </button>
   );
 };

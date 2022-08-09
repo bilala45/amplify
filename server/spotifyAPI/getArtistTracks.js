@@ -29,6 +29,24 @@ const reqAlbumTracks = async (accessToken, albumId) => {
 };
 
 /**
+ * Converts ms to minutes:seconds
+ * @param duration duration in ms
+ * @returns String
+ */
+const msToMinSec = (duration) => {
+  const totalSeconds = Math.trunc(duration / 1000);
+
+  // strip decimal from minutes
+  const minutes = Math.trunc(totalSeconds / 60);
+  let seconds = totalSeconds % 60;
+  if (seconds < 10) {
+    return `${minutes}:0${seconds}`;
+  }
+
+  return `${minutes}:${seconds}`;
+};
+
+/**
  * Processes songs in artist's albums to find unique tracks
  * @param accessToken Access token provided after auth
  * @param artistId Array of artist's albums
@@ -48,7 +66,14 @@ const getArtistTracks = async (accessToken, albumsArr) => {
       if (!trackSet.has(track.name)) {
         // add album to set for tracking and to array
         trackSet.add(track.name);
-        albumTracks.push({ name: track.name, id: track.id });
+        albumTracks.push({
+          name: track.name,
+          albumName: album.name,
+          img: album.img,
+          duration: msToMinSec(track.duration_ms),
+          id: track.id,
+          explicit: track.explicit,
+        });
       }
     }
   }

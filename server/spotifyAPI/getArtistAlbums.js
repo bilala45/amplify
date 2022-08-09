@@ -53,7 +53,14 @@ const getArtistAlbums = async (accessToken, artistId) => {
       // add album to albumMap for tracking
       albumMap[album.name] = { tracks: album.total_tracks };
       // add album to array
-      return [{ name: album.name, id: album.id, tracks: album.total_tracks }];
+      return [
+        {
+          name: album.name,
+          id: album.id,
+          img: album.images[0].url,
+          tracks: album.total_tracks,
+        },
+      ];
     }
     return [];
   });

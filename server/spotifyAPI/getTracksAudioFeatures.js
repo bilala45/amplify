@@ -57,7 +57,13 @@ const getTracksAudioFeatures = async (accessToken, tracks) => {
   // audio features endpoint doesn't return the track name so we use the id to find the song name
   const audioFeaturesMap = {};
   for (const track of tracks) {
-    audioFeaturesMap[track.id] = track.name;
+    audioFeaturesMap[track.id] = {
+      name: track.name,
+      explicit: track.explicit,
+      albumName: track.albumName,
+      duration: track.duration,
+      img: track.img,
+    };
   }
 
   // create id groups to pass to api call
@@ -74,7 +80,11 @@ const getTracksAudioFeatures = async (accessToken, tracks) => {
     // add each track's audio features to array
     for (const track of groupAudioFeatures) {
       trackAudioFeatures.push({
-        name: audioFeaturesMap[track.id],
+        name: audioFeaturesMap[track.id].name,
+        explicit: audioFeaturesMap[track.id].explicit,
+        albumName: audioFeaturesMap[track.id].albumName,
+        duration: audioFeaturesMap[track.id].duration,
+        img: audioFeaturesMap[track.id].img,
         id: track.id,
         danceability: track.danceability,
         energy: track.energy,

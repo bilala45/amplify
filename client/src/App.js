@@ -6,7 +6,6 @@ import Footer from "./components/Footer";
 import LoginPage from "./pages/LoginPage";
 import AboutPage from "./pages/AboutPage";
 import SearchPage from "./pages/SearchPage";
-import ResultsPage from "./pages/ResultsPage";
 
 const App = () => (
   <div className="bg-gradient-to-r from-emerald-500 to-teal-500 px-8 sm:px-14 min-h-screen">
@@ -16,7 +15,6 @@ const App = () => (
         <Route path="/" element={<LoginPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/search" element={<SearchPage />} />
-        <Route path="/results" element={<ResultsPage />} />
       </Routes>
       {/* <Footer /> */}
     </div>

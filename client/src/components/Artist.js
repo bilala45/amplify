@@ -2,7 +2,14 @@ import { getAccessToken } from "../spotify.js";
 import blankProfile from "../assets/blank-profile.png";
 import axios from "axios";
 
-const Artist = ({ id, name, img, setSearchInput, setArtistTracks }) => {
+const Artist = ({
+  id,
+  name,
+  img,
+  setSearchInput,
+  setArtistTracks,
+  setIsLoading,
+}) => {
   // handle artists with no image
   if (!img.length) {
     img = blankProfile;
@@ -11,6 +18,10 @@ const Artist = ({ id, name, img, setSearchInput, setArtistTracks }) => {
   const handleArtistClick = async () => {
     // closes search results window after submitting a search
     setSearchInput("");
+    setIsLoading(true);
+
+    // reset artist tracks
+    setArtistTracks([]);
 
     // retrieve access token from local storage
     const accessToken = getAccessToken();
@@ -23,6 +34,7 @@ const Artist = ({ id, name, img, setSearchInput, setArtistTracks }) => {
       }
     );
     console.log(response);
+    setIsLoading(false);
     setArtistTracks(response.data);
   };
 

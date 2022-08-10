@@ -1,10 +1,11 @@
 import getUserTopTracks from "./getUserTopTracks.js";
 import getTracksAudioFeatures from "./getTracksAudioFeatures.js";
+import avgUserAudioFeatures from "./avgUserAudioFeatures.js";
 
 /**
- * Gets audio features for a user's top tracks
+ * Retrieves and processes audio features for a user's top tracks
  * @param accessToken Access token provided after auth
- * @returns []
+ * @returns {danceability, energy, speechiness, acousticness, instrumentalness, liveness, valence, tempo}
  */
 const getUserAudioFeatures = async (accessToken) => {
   // get user's top tracks as an array
@@ -16,9 +17,9 @@ const getUserAudioFeatures = async (accessToken) => {
     userTopTracks
   );
 
-  console.log(trackAudioFeatures);
+  const processedUserFeatures = avgUserAudioFeatures(trackAudioFeatures);
 
-  return trackAudioFeatures;
+  return processedUserFeatures;
 };
 
 export default getUserAudioFeatures;

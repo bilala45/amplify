@@ -25,6 +25,7 @@ const getArtistAudioFeatures = async (accessToken, artistId) => {
 
   // get a user's audio features
   const userAudioFeatures = await getUserAudioFeatures(accessToken);
+  console.log(userAudioFeatures);
 
   // process artist's audio features against user data
   const recs = getRecommendations(userAudioFeatures, tracksAudioFeatures);

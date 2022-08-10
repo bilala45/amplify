@@ -9,6 +9,7 @@ const getRecommendations = (userAudioFeats, artistAudioFeats) => {
     // replace each audio feature with absolute value of difference
     calculateAbsDifference("danceability");
     calculateAbsDifference("energy");
+    calculateAbsDifference("loudness");
     calculateAbsDifference("speechiness");
     calculateAbsDifference("acousticness");
     calculateAbsDifference("instrumentalness");
@@ -33,6 +34,7 @@ const getRecommendations = (userAudioFeats, artistAudioFeats) => {
 
   sortTracksByFeature("danceability");
   sortTracksByFeature("energy");
+  sortTracksByFeature("loudness");
   sortTracksByFeature("speechiness");
   sortTracksByFeature("acousticness");
   sortTracksByFeature("instrumentalness");
@@ -46,6 +48,7 @@ const getRecommendations = (userAudioFeats, artistAudioFeats) => {
       track.danceability +
       track.energy +
       track.speechiness +
+      track.loudness +
       track.acousticness +
       track.instrumentalness +
       track.liveness +

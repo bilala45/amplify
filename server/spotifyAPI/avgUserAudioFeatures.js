@@ -18,7 +18,7 @@ const avgUserAudioFeatures = (audioFeatures) => {
 
   // average audio features
   for (const [key, value] of Object.entries(avgAudioFeatures)) {
-    avgAudioFeatures[key] = Math.round(value / audioFeatures.length);
+    avgAudioFeatures[key] = value / audioFeatures.length;
   }
 
   return avgAudioFeatures;

@@ -3,7 +3,7 @@ import { BsSearch, BsMusicNote, BsCollectionPlay } from "react-icons/bs";
 const AboutInstructions = () => (
   <div>
     <div className="hidden sm:block">
-      <div className="grid grid-cols-3 justify-items-center pt-10 text-2xl gap-8">
+      <div className="grid grid-cols-3 justify-items-center pt-10 text-3xl gap-8">
         <div className="col-span-1 text-teal-600">
           <BsSearch />
         </div>
@@ -15,15 +15,15 @@ const AboutInstructions = () => (
         </div>
       </div>
 
-      <div className="grid grid-cols-3 pt-4 gap-8 text-center">
+      <div className="grid grid-cols-3 pt-6 gap-8 text-center">
         <div className="col-span-1">
           Use the search bar to search for an artist.
         </div>
         <div className="col-span-1">
-          We'll analyze your listening history from the last 6 months.
+          We'll analyze your top played songs over the last 6 months...
         </div>
         <div className="col-span-1">
-          You'll get 5 songs by that artist that we think you'll like best.
+          ...and use your listening data to suggest some songs by that artist.
         </div>
       </div>
     </div>
@@ -36,13 +36,16 @@ const AboutInstructions = () => (
 
       <div className="pt-4 flex items-center">
         <BsMusicNote className="text-2xl mr-6 text-teal-600" />
-        <div>We'll analyze your listening history from the last 6 months.</div>
+        <div>
+          {" "}
+          We'll analyze your top played songs over the last 6 months...
+        </div>
       </div>
 
       <div className="pt-4 flex items-center">
         <BsCollectionPlay className="text-2xl mr-6 text-teal-600" />
         <div>
-          You'll get 5 songs by that artist that we think you'll like best.
+          ...and use your listening data to suggest some songs by that artist.
         </div>
       </div>
     </div>

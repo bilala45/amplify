@@ -14,11 +14,7 @@ const AboutPage = () => {
   return (
     <div className="bg-gradient-to-r from-emerald-500 to-teal-500 px-8 sm:px-14 min-h-screen">
       <Header />
-      <div className="max-w-screen-xl mx-auto">
-        <div className="flex justify-center">
-          <AboutModal />
-        </div>
-      </div>
+      <AboutModal />
     </div>
   );
 };

@@ -1,12 +1,17 @@
+import { BsSpotify } from "react-icons/bs";
+
 const LoginButton = () => (
   <div className="flex justify-center lg:justify-start">
     <a
-      className="rounded-xl py-2 px-7 bg-slate-200 hover:bg-emerald-500 sm:text-lg font-medium"
+      className="flex items-center rounded-full py-2 pr-5 pl-4 text-[#151515] sm:text-lg font-medium bg-white hover:bg-emerald-500"
       href="http://localhost:3001/api/login"
     >
+      <BsSpotify className="mr-3 text-2xl" />
       Log in with Spotify
     </a>
   </div>
 );
 
 export default LoginButton;
+
+// bg-gradient-to-r from-emerald-500 to-teal-500

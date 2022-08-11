@@ -1,11 +1,17 @@
-const SongResult = ({ name, explicit, albumName, duration, img }) => (
+const SearchRecommendations = ({
+  name,
+  explicit,
+  albumName,
+  duration,
+  img,
+}) => (
   <span className="flex items-center h-16 sm:h-20 mt-3 sm:mt-4 rounded-md bg-emerald-200 drop-shadow-xl shadow-black">
     <img
       className="h-14 sm:h-[72px] rounded-sm w-auto ml-1"
       src={img}
       alt="album cover"
     ></img>
-    <div className="w-full text-sm sm:text-lg pl-2 sm:pl-3 overflow-hidden whitespace-nowrap">
+    <div className="w-full text-sm sm:text-lg pl-2 sm:pl-0 sm:ml-3 truncate">
       <div className="font-bold flex items-center">
         {name}
         {explicit ? (
@@ -29,4 +35,4 @@ const SongResult = ({ name, explicit, albumName, duration, img }) => (
   </span>
 );
 
-export default SongResult;
+export default SearchRecommendations;

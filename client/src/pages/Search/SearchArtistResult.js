@@ -1,8 +1,8 @@
-import { getAccessToken } from "../spotify.js";
-import blankProfile from "../assets/blank-profile.png";
 import axios from "axios";
+import { getAccessToken } from "../../utils/spotify.js";
+import blankProfile from "../../assets/imgs/blank-profile.png";
 
-const Artist = ({
+const SearchArtistResult = ({
   id,
   name,
   img,
@@ -10,7 +10,7 @@ const Artist = ({
   setArtistTracks,
   setIsLoading,
 }) => {
-  // handle artists with no image
+  // sets image for artists with no picture provided
   if (!img.length) {
     img = blankProfile;
   }
@@ -41,18 +41,18 @@ const Artist = ({
   return (
     <button
       onClick={handleArtistClick}
-      className="h-[4.5rem] flex items-center text-left w-full hover:bg-emerald-300 hover:cursor-pointer"
+      className="h-16 flex items-center text-left w-full bg-white hover:bg-slate-300 hover:cursor-pointer first:rounded-t-md last:rounded-b-md"
     >
       <img
-        className="ml-3 max-h-14 w-14 rounded-full"
+        className="ml-3 max-h-12 w-12 rounded-full"
         src={img}
         alt={name}
       ></img>
-      <div className="text-md sm:text-lg font-bold tracking-wider pl-4 pr-8">
+      <div className="text-base sm:text-lg font-bold tracking-wide pl-4 pr-8">
         {name}
       </div>
     </button>
   );
 };
 
-export default Artist;
+export default SearchArtistResult;

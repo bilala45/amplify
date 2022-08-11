@@ -1,4 +1,6 @@
-import SpotifyLogo from "../assets/Spotify_Logo_RGB_Black.png";
+import SpotifyLogo from "../assets/imgs/Spotify_Logo_RGB_Black.png";
+
+// NOTE: This header is used for all pages EXCEPT the login page
 
 const Header = () => (
   // flexbox with items spaced between and padding on left and right

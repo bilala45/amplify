@@ -9,9 +9,9 @@ import axios from "axios";
  */
 const reqUserTopTracks = async (accessToken) => {
   const queryParams = qs.stringify({
-    // top 50 tracks from approximately last 6 months
-    time_range: "medium_term",
-    limit: 50,
+    // top 50 tracks from approximately last month
+    time_range: "short_term",
+    limit: 25,
   });
 
   try {

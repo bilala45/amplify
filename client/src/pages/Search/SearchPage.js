@@ -5,17 +5,18 @@ import Header from "../../components/Header";
 import SearchBar from "./SearchBar";
 import SearchRecommendations from "./SearchRecommendations";
 import Loading from "../../components/Loading";
+import SearchArtistCard from "./SearchArtistCard";
 
 const SearchPage = () => {
   const [artistTracks, setArtistTracks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   return (
-    <div className="bg-gradient-to-r from-emerald-500 to-teal-500 px-8 sm:px-14 min-h-screen">
+    <div className="bg-gradient-to-tl from-slate-900 to-black px-8 sm:px-14 min-h-screen">
       <Header />
       <div className="max-w-screen-xl mx-auto">
         <div className="mx-auto max-w-screen-md">
-          <div className="text-2xl sm:text-3xl text-center font-semibold pb-10">
+          <div className="text-2xl sm:text-3xl text-center font-semibold pb-10 text-white">
             Your new favorite song is a search away.
           </div>
 
@@ -23,11 +24,16 @@ const SearchPage = () => {
             setIsLoading={setIsLoading}
             setArtistTracks={setArtistTracks}
           />
+        </div>
 
-          {isLoading && <Loading />}
+        {isLoading && <Loading />}
 
+        <div className="grid grid-cols-3 max-w-screen-lg mx-auto">
           {/* display song results */}
-          <div className="pt-10 sm:px-6 pb-24">
+          <div className="mt-10 sm:px-6 pb-10 mb-24 col-span-2 items-center">
+            <div className="text-white font-bold text-2xl ml-2 mt-2">
+              Your results
+            </div>
             {artistTracks.length > 0 &&
               artistTracks.map((song) => (
                 <SearchRecommendations
@@ -40,6 +46,7 @@ const SearchPage = () => {
                 />
               ))}
           </div>
+          <SearchArtistCard />
         </div>
       </div>
     </div>

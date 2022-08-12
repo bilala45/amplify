@@ -20,12 +20,13 @@ app.use(cors()); // allow client requests
 // misc middleware
 app.use(morgan("tiny")); // logger
 
-// handles request to home page
-app.get("/", (req, res) => {
-  // combines res.status(200).send('OK')
-  // if we just send res.status(200), the request hangs
-  res.sendStatus(200);
-});
+// might not even need this for our app since our home page is the react app's url, not the server's url
+// // handles request to home page
+// app.get("/", (req, res) => {
+//   // combines res.status(200).send('OK')
+//   // if we just send res.status(200), the request hangs
+//   res.sendStatus(200);
+// });
 
 /**
  * User authentication routes
@@ -57,5 +58,5 @@ app.get("/api/search/submit", async (req, res) => {
 
 // listen for requests at port
 app.listen(port, () => {
-  console.log(`Artist-recommender server listening on port ${port}`);
+  console.log(`Amplify server listening on port ${port}`);
 });

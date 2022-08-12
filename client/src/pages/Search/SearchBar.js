@@ -26,12 +26,12 @@ const SearchBar = ({ setIsLoading, setArtistTracks }) => {
   }, [searchInput]);
 
   return (
-    <div className="relative flex justify-between h-12 items-center rounded-md bg-white shadow-2xl shadow-slate-700">
+    <div className="relative flex justify-between h-12 items-center rounded-lg bg-white shadow-2xl shadow-slate-700">
       <div className="px-4 text-md">
         <BsSearch />
       </div>
       <input
-        className="rounded-md w-full pr-6 outline-none"
+        className="rounded-md w-full mr-6 outline-none"
         value={searchInput}
         onChange={(e) => setSearchInput(e.target.value)}
         type="text"

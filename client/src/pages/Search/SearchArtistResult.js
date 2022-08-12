@@ -33,7 +33,6 @@ const SearchArtistResult = ({
         params: { accessToken, artistId: id },
       }
     );
-    console.log(response);
     setIsLoading(false);
     setArtistTracks(response.data);
   };

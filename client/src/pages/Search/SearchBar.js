@@ -1,11 +1,12 @@
 import axios from "axios";
 import { BsSearch } from "react-icons/bs";
 import { useState, useEffect } from "react";
+import { getAccessToken } from "../../utils/spotify.js";
 
 // component imports
 import SearchArtistResult from "./SearchArtistResult";
 
-const SearchBar = ({ setIsLoading, setArtistTracks, accessToken }) => {
+const SearchBar = ({ setIsLoading, setArtistTracks }) => {
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
@@ -13,7 +14,8 @@ const SearchBar = ({ setIsLoading, setArtistTracks, accessToken }) => {
   // runs after changes to searchInput state
   useEffect(() => {
     const getSearchResults = async () => {
-      if (accessToken !== null && searchInput.length > 0) {
+      const accessToken = getAccessToken();
+      if (accessToken && searchInput.length > 0) {
         const response = await axios.get("http://localhost:3001/api/search", {
           params: { accessToken, searchInput },
         });

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 // import components
 import Header from "../../components/Header";
@@ -47,36 +47,3 @@ const SearchPage = () => {
 };
 
 export default SearchPage;
-
-// {accessToken !== null ? (
-//   <div className="mx-auto max-w-screen-md">
-//     <div className="text-2xl sm:text-3xl text-center font-semibold pb-10">
-//       Your new favorite song is a search away.
-//     </div>
-
-//     <SearchBar
-//       setIsLoading={setIsLoading}
-//       setArtistTracks={setArtistTracks}
-//       accessToken={accessToken}
-//     />
-
-//     {isLoading && <Loading />}
-
-//     {/* display song results */}
-//     <div className="pt-10 sm:px-6 pb-24">
-//       {artistTracks.length > 0 &&
-//         artistTracks.map((song) => (
-//           <SearchRecommendations
-//             key={song.id}
-//             name={song.name}
-//             explicit={song.explicit}
-//             albumName={song.albumName}
-//             duration={song.duration}
-//             img={song.img}
-//           />
-//         ))}
-//     </div>
-//   </div>
-// ) : (
-//   window.location.reload()
-// )}

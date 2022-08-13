@@ -6,7 +6,7 @@ const AboutProgressButton = () => {
 
   return (
     <button
-      className="bg-white w-40 text-black mt-8 sm:mt-10 font-semibold rounded-full py-2 text-sm hover:bg-cyan-300"
+      className="bg-cyan-400 w-40 text-black mt-8 sm:mt-10 font-semibold rounded-full py-2 text-sm hover:bg-cyan-500"
       onClick={() => {
         navigate("/search");
       }}

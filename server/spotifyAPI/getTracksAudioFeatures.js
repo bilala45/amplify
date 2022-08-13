@@ -63,6 +63,7 @@ const getTracksAudioFeatures = async (accessToken, tracks) => {
       albumName: track.albumName,
       duration: track.duration,
       img: track.img,
+      link: track.link,
     };
   }
 
@@ -86,6 +87,7 @@ const getTracksAudioFeatures = async (accessToken, tracks) => {
           albumName: audioFeaturesMap[track.id].albumName,
           duration: audioFeaturesMap[track.id].duration,
           img: audioFeaturesMap[track.id].img,
+          link: audioFeaturesMap[track.id].link,
           id: track.id,
           danceability: track.danceability,
           energy: track.energy,

@@ -37,6 +37,7 @@ const SearchArtistResult = ({
       }
     );
     setIsLoading(false);
+    console.log(response.data.recs);
     setArtistTracks(response.data.recs);
     setArtistData(response.data.artist);
   };

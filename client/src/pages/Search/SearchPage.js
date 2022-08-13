@@ -55,6 +55,7 @@ const SearchPage = () => {
                     albumName={song.albumName}
                     duration={song.duration}
                     img={song.img}
+                    link={song.link}
                   />
                 ))}
               </div>

@@ -73,6 +73,7 @@ const getArtistTracks = async (accessToken, albumsArr) => {
           duration: msToMinSec(track.duration_ms),
           id: track.id,
           explicit: track.explicit,
+          link: track.external_urls.spotify,
         });
       }
     }

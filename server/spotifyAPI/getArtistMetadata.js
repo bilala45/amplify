@@ -25,10 +25,19 @@ const reqArtistMetadata = async (accessToken, artistId) => {
 
 const getArtistMetadata = async (accessToken, artistId) => {
   const res = await reqArtistMetadata(accessToken, artistId);
+
+  if (res.images.length > 0) {
+    return {
+      name: res.name,
+      id: res.artistId,
+      img: res.images[0].url,
+    };
+    // handles artist with no img
+  }
   return {
     name: res.name,
-    id: artistId,
-    img: res.images[0].url,
+    id: res.artistId,
+    img: "",
   };
 };
 

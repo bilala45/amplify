@@ -27,6 +27,7 @@ const getArtistMetadata = async (accessToken, artistId) => {
   const res = await reqArtistMetadata(accessToken, artistId);
   return {
     name: res.name,
+    id: artistId,
     img: res.images[0].url,
   };
 };

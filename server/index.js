@@ -10,6 +10,7 @@ import {
 import getSearchResults from "./spotifyAPI/getSearchResults.js";
 import getArtistAudioFeatures from "./spotifyAPI/searchAudioFeatures.js";
 import getArtistData from "./spotifyAPI/getArtistData.js";
+import getFilteredAudioFeatures from "./spotifyAPI/filterAudioFeatures.js";
 
 // create express app
 const app = express();
@@ -48,6 +49,13 @@ app.get("/api/search/submit", async (req, res) => {
   const artistDiscObj = await getArtistAudioFeatures(accessToken, artistId);
   const artistDataObj = await getArtistData(accessToken, artistId);
   res.json({ recs: artistDiscObj, artist: artistDataObj });
+});
+
+// handles filtering results by album
+app.get("/api/search/filter", async (req, res) => {
+  const { accessToken, artistId, albumId } = req.query;
+  const artistDiscObj = await getFilteredAudioFeatures(accessToken, albumId);
+  res.json({ recs: artistDiscObj });
 });
 
 // listen for requests at port

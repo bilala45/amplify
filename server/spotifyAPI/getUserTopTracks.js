@@ -11,7 +11,7 @@ const reqUserTopTracks = async (accessToken) => {
   const queryParams = qs.stringify({
     // top 50 tracks from approximately last month
     time_range: "short_term",
-    limit: 25,
+    limit: 50,
   });
 
   try {

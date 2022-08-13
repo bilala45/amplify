@@ -35,8 +35,8 @@ const SearchPage = () => {
           </div>
         )}
 
-        <div className="grid grid-cols-3 max-w-screen-lg mx-auto">
-          <div className="mt-10 sm:px-6 pb-10 mb-24 col-span-2 items-center">
+        <div className="lg:grid grid-cols-3 max-w-screen-lg mx-auto">
+          <div className="mt-10 sm:px-6 pb-10 lg:mb-24 col-span-2 items-center">
             {isAlbumLoading && (
               <div className="rounded-md text-center w-58 sm:w-fit mx-auto flex px-1 sm:pl-3 sm:pr-5 mt-16 sm:mt-60 items-center justify-center text-white">
                 <Loading />
@@ -44,7 +44,7 @@ const SearchPage = () => {
             )}
             {artistTracks.length > 0 && (
               <div>
-                <div className="text-white font-bold text-2xl ml-2 mt-2">
+                <div className="text-white font-bold text-2xl lg:ml-2 mt-2">
                   Your results
                 </div>
                 {artistTracks.map((song) => (
@@ -61,7 +61,7 @@ const SearchPage = () => {
             )}
           </div>
 
-          <div className="col-span-1 mt-14 mb-[8.5rem] rounded-md pl-4 text-white">
+          <div className="col-span-1 mt-6 lg:mt-14 pb-10 sm:pb-[8.5rem] rounded-md sm:pl-4 text-white">
             {Object.keys(artistData).length > 0 && (
               <SearchArtistCard
                 artistMetadata={artistData.artistMetadata}

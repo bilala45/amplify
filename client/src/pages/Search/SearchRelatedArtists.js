@@ -1,5 +1,6 @@
 import axios from "axios";
 import { getAccessToken } from "../../utils/spotify.js";
+import blankProfile from "../../assets/imgs/blank-profile.png";
 
 const SearchRelatedArtists = ({
   relatedArtist,
@@ -7,6 +8,11 @@ const SearchRelatedArtists = ({
   setArtistTracks,
   setArtistData,
 }) => {
+  // sets image for artists with no picture provided
+  if (!relatedArtist.img.length) {
+    relatedArtist.img = blankProfile;
+  }
+
   const handleArtistClick = async (id) => {
     // closes search results window after submitting a search
     setIsLoading(true);

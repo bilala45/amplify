@@ -6,7 +6,7 @@ import { getAccessToken } from "../../utils/spotify.js";
 // component imports
 import SearchArtistResult from "./SearchArtistResult";
 
-const SearchBar = ({ setIsLoading, setArtistTracks }) => {
+const SearchBar = ({ setIsLoading, setArtistTracks, setArtistData }) => {
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
@@ -50,6 +50,7 @@ const SearchBar = ({ setIsLoading, setArtistTracks }) => {
               setSearchInput={setSearchInput}
               setArtistTracks={setArtistTracks}
               setIsLoading={setIsLoading}
+              setArtistData={setArtistData}
             />
           ))}
       </div>

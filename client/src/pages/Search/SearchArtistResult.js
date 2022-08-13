@@ -9,6 +9,7 @@ const SearchArtistResult = ({
   setSearchInput,
   setArtistTracks,
   setIsLoading,
+  setArtistData,
 }) => {
   // sets image for artists with no picture provided
   if (!img.length) {
@@ -34,7 +35,8 @@ const SearchArtistResult = ({
       }
     );
     setIsLoading(false);
-    setArtistTracks(response.data);
+    setArtistTracks(response.data.recs);
+    setArtistData(response.data.artist);
   };
 
   return (

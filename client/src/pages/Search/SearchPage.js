@@ -9,6 +9,7 @@ import SearchArtistCard from "./SearchArtistCard";
 
 const SearchPage = () => {
   const [artistTracks, setArtistTracks] = useState([]);
+  const [artistData, setArtistData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
   return (
@@ -23,19 +24,21 @@ const SearchPage = () => {
           <SearchBar
             setIsLoading={setIsLoading}
             setArtistTracks={setArtistTracks}
+            setArtistData={setArtistData}
           />
         </div>
 
         {isLoading && <Loading />}
 
-        <div className="grid grid-cols-3 max-w-screen-lg mx-auto">
-          {/* display song results */}
-          <div className="mt-10 sm:px-6 pb-10 mb-24 col-span-2 items-center">
-            <div className="text-white font-bold text-2xl ml-2 mt-2">
-              Your results
-            </div>
-            {artistTracks.length > 0 &&
-              artistTracks.map((song) => (
+        {artistTracks.length > 0 && (
+          <div className="grid grid-cols-3 max-w-screen-lg mx-auto">
+            {/* display song results */}
+
+            <div className="mt-10 sm:px-6 pb-10 mb-24 col-span-2 items-center">
+              <div className="text-white font-bold text-2xl ml-2 mt-2">
+                Your results
+              </div>
+              {artistTracks.map((song) => (
                 <SearchRecommendations
                   key={song.id}
                   name={song.name}
@@ -45,9 +48,17 @@ const SearchPage = () => {
                   img={song.img}
                 />
               ))}
+            </div>
+
+            <SearchArtistCard
+              artistMetadata={artistData.artistMetadata}
+              relatedArtists={artistData.relatedArtists}
+              setIsLoading={setIsLoading}
+              setArtistTracks={setArtistTracks}
+              setArtistData={setArtistData}
+            />
           </div>
-          <SearchArtistCard />
-        </div>
+        )}
       </div>
     </div>
   );

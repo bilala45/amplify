@@ -4,7 +4,7 @@ import ExamplePhone from "../../assets/imgs/Example-phone.png";
 const LoginSitePreview = () => (
   <div>
     <img
-      className="rounded-xl hidden sm:block"
+      className="rounded-xl hidden sm:block shadow-black shadow-2xl"
       src={ExampleWebpage}
       alt="Amplify website demo"
     ></img>

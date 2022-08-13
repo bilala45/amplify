@@ -23,6 +23,8 @@ const SearchArtistResult = ({
 
     // reset artist tracks
     setArtistTracks([]);
+    // reset artist data
+    setArtistData({});
 
     // retrieve access token from local storage
     const accessToken = getAccessToken();

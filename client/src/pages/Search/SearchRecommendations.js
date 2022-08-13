@@ -7,9 +7,9 @@ const SearchRecommendations = ({
   duration,
   img,
 }) => (
-  <span className="flex items-center h-16 sm:h-20 mt-3 sm:mt-4 rounded-md text-white bg-neutral-700">
+  <div className="flex items-center h-16 sm:h-20 mt-3 sm:mt-4 text-white bg-neutral-6000 rounded-md hover:bg-neutral-600 hover:cursor-pointer ">
     <img
-      className="h-14 sm:h-[72px] rounded-sm w-auto ml-1"
+      className="h-14 sm:h-[4.5rem] rounded-sm w-auto ml-1"
       src={img}
       alt="album cover"
     ></img>
@@ -20,7 +20,7 @@ const SearchRecommendations = ({
       <div className="pt-1 text-sm font-semibold">{albumName}</div>
     </div>
     <div className="w-fit text-sm sm:text-base mx-3 sm:mx-4">{duration}</div>
-  </span>
+  </div>
 );
 
 export default SearchRecommendations;

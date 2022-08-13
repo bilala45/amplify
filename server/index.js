@@ -9,6 +9,7 @@ import {
 } from "./controllers/userAuthController.js";
 import getSearchResults from "./spotifyAPI/getSearchResults.js";
 import getArtistAudioFeatures from "./spotifyAPI/searchAudioFeatures.js";
+import getArtistData from "./spotifyAPI/getArtistData.js";
 
 // create express app
 const app = express();
@@ -19,14 +20,6 @@ app.use(cors()); // allow client requests
 
 // misc middleware
 app.use(morgan("tiny")); // logger
-
-// might not even need this for our app since our home page is the react app's url, not the server's url
-// // handles request to home page
-// app.get("/", (req, res) => {
-//   // combines res.status(200).send('OK')
-//   // if we just send res.status(200), the request hangs
-//   res.sendStatus(200);
-// });
 
 /**
  * User authentication routes
@@ -53,7 +46,8 @@ app.get("/api/search", async (req, res) => {
 app.get("/api/search/submit", async (req, res) => {
   const { accessToken, artistId } = req.query;
   const artistDiscObj = await getArtistAudioFeatures(accessToken, artistId);
-  res.send(artistDiscObj);
+  const artistDataObj = await getArtistData(accessToken, artistId);
+  res.json({ recs: artistDiscObj, artist: artistDataObj });
 });
 
 // listen for requests at port

@@ -1,4 +1,5 @@
 import getArtistMetadata from "./getArtistMetadata.js";
+import getArtistAlbums from "./getArtistAlbums.js";
 import getArtistRelatedArtists from "./getArtistRelatedArtists.js";
 
 /**
@@ -11,24 +12,23 @@ const getArtistData = async (accessToken, artistId) => {
   // get artist metadata
   const artistMetadata = await getArtistMetadata(accessToken, artistId);
 
-  //   // get artist's albums
-  //   const artistAlbums = await getArtistAlbums(accessToken, artistId);
+  // get artist's albums
+  const artistAlbums = await getArtistAlbums(accessToken, artistId);
 
   // get artist's related artists
   const relatedArtists = await getArtistRelatedArtists(accessToken, artistId);
 
   const artistData = {
     artistMetadata,
+    artistAlbums,
     relatedArtists,
   };
-
-  console.log(artistData);
 
   return artistData;
 };
 
 // getArtistData(
-//   "BQDRdD1TDaOEHhvMhgXulaLbYYrm0_ghm-izRo1yxFO_Nvq4XcgBHU3vzQ7n5npiD0OEwQYNGOJldV73jOgPtqPHsPIFdPFHfmP-uqVmSjk2cIbkFTIvoMmg2s__uJrrvrzTVRVZpi8l6BslhbKnWmv0kPK4M3gumsVy_fxhqW9HoZk",
+//   "BQDIfxJ7QuPCWb_QTfYqAbA2P3ScBP_CbtKcMaGAHJu_W4LwUabrWcOMYJGWVgyT1O9Jg0vBNldsNbaHdvdvkOoTfnbgl3FZadhRVPEr0zJ2eB2yLktW-_DJahceUVINEMaXdeV_FOJ_vz9ESJDv8lHG7Cper_nyR7ruHGuxH2KnLZw",
 //   "66CXWjxzNUsdJxJ2JdwvnR"
 // );
 

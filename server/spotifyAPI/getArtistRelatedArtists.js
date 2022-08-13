@@ -30,6 +30,7 @@ const getArtistRelatedArtists = async (accessToken, artistId) => {
   for (const relatedArtist of relatedArtists) {
     relatedArtistsArr.push({
       name: relatedArtist.name,
+      id: relatedArtist.id,
       img: relatedArtist.images[0].url,
     });
   }

@@ -42,28 +42,24 @@ const getArtistAlbums = async (accessToken, artistId) => {
   const albumsArr = await reqArtistAlbums(accessToken, artistId);
   const albumMap = {};
 
-  return albumsArr.flatMap((album) => {
-    // current album is in albumMap and has more tracks than stored album
-    // OR album is not in album map
+  // iterate through albumsArr and add unique albums to map
+  for (const album of albumsArr) {
     if (
       (albumMap[album.name] &&
         album.total_tracks > albumMap[album.name].tracks) ||
       !albumMap[album.name]
     ) {
       // add album to albumMap for tracking
-      albumMap[album.name] = { tracks: album.total_tracks };
-      // add album to array
-      return [
-        {
-          name: album.name,
-          id: album.id,
-          img: album.images[0].url,
-          tracks: album.total_tracks,
-        },
-      ];
+      albumMap[album.name] = {
+        name: album.name,
+        id: album.id,
+        img: album.images[0].url,
+        tracks: album.total_tracks,
+      };
     }
-    return [];
-  });
+  }
+
+  return Object.values(albumMap);
 };
 
 export default getArtistAlbums;

@@ -79,25 +79,27 @@ const getTracksAudioFeatures = async (accessToken, tracks) => {
 
     // add each track's audio features to array
     for (const track of groupAudioFeatures) {
-      trackAudioFeatures.push({
-        name: audioFeaturesMap[track.id].name,
-        explicit: audioFeaturesMap[track.id].explicit,
-        albumName: audioFeaturesMap[track.id].albumName,
-        duration: audioFeaturesMap[track.id].duration,
-        img: audioFeaturesMap[track.id].img,
-        id: track.id,
-        danceability: track.danceability,
-        energy: track.energy,
-        key: track.key,
-        loudness: track.loudness,
-        mode: track.mode,
-        speechiness: track.speechiness,
-        acousticness: track.acousticness,
-        instrumentalness: track.instrumentalness,
-        liveness: track.liveness,
-        valence: track.valence,
-        tempo: track.tempo,
-      });
+      if (track !== null) {
+        trackAudioFeatures.push({
+          name: audioFeaturesMap[track.id].name,
+          explicit: audioFeaturesMap[track.id].explicit,
+          albumName: audioFeaturesMap[track.id].albumName,
+          duration: audioFeaturesMap[track.id].duration,
+          img: audioFeaturesMap[track.id].img,
+          id: track.id,
+          danceability: track.danceability,
+          energy: track.energy,
+          key: track.key,
+          loudness: track.loudness,
+          mode: track.mode,
+          speechiness: track.speechiness,
+          acousticness: track.acousticness,
+          instrumentalness: track.instrumentalness,
+          liveness: track.liveness,
+          valence: track.valence,
+          tempo: track.tempo,
+        });
+      }
     }
   }
 

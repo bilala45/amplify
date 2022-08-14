@@ -24,7 +24,11 @@ To learn more about the Spotify Web API, check out this [link](https://developer
 
 ### Webpage Demo
 
+https://user-images.githubusercontent.com/64950985/184518866-322611a5-b2a5-4c6a-8839-94c8326edee7.mp4
+
 ### Mobile Demo
+
+https://user-images.githubusercontent.com/64950985/184518596-8fbc142e-efa4-4149-836e-6f043b6f85fd.mp4
 
 ### Pictures
 

@@ -14,9 +14,9 @@ Additional features:
 
 Check out a demo of the app below!
 
-## Tech
+## Tech Stack
 
-Technologies: React.js, Node.js, Express.js, Spotify Web API
+React.js, Node.js, Express.js, Spotify Web API, Tailwind CSS
 
 To learn more about the Spotify Web API, check out this [link](https://developer.spotify.com/).
 

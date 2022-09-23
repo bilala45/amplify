@@ -6,7 +6,7 @@ import Footer from "../../components/Footer";
 
 const LoginPage = () => {
   return (
-    <div className="bg-gradient-to-tl from-neutral-700 to-black px-8 sm:px-14 flex flex-col min-h-screen">
+    <div className="bg-gradient-to-tl from-neutral-500 to-black px-8 sm:px-14 flex flex-col min-h-screen">
       <Header />
       <div className="max-w-screen-xl mx-auto">
         <div className="lg:grid grid-cols-3 gap-6 pb-20 sm:pt-8">
@@ -25,5 +25,3 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
-
-// bg-gradient-to-tl from-cyan-400 to-black

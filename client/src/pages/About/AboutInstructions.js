@@ -15,7 +15,7 @@ const AboutInstructions = () => (
         </div>
       </div>
 
-      <div className="grid grid-cols-3 pt-6 gap-8 text-center">
+      <div className="grid grid-cols-3 pt-6 gap-8 text-center font-medium">
         <div className="col-span-1">
           Use the search bar to search for an artist.
         </div>

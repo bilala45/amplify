@@ -14,7 +14,7 @@ const SearchPage = () => {
   const [isAlbumLoading, setIsAlbumLoading] = useState(false);
 
   return (
-    <div className="bg-gradient-to-tl from-cyan-800 to-black px-8 sm:px-14 min-h-screen">
+    <div className="bg-gradient-to-tl from-cyan-700 to-black px-8 sm:px-14 min-h-screen">
       <Header />
       <div className="max-w-screen-xl mx-auto">
         <div className="mx-auto max-w-screen-md">

@@ -11,6 +11,7 @@ const SearchRecommendations = ({
   <a
     href={link}
     target="_blank"
+    rel="noreferrer"
     className="flex items-center h-16 sm:h-20 mt-3 sm:mt-4 text-white bg-neutral-6000 rounded-md hover:bg-neutral-600 hover:cursor-pointer "
   >
     <img
